@@ -22,6 +22,7 @@
 #include "backup_sram.h"
 
 #include "protocol.h"
+#include "pwm.h"
 
 #include "usbd_cdc_vcp.h"
 #include "usbd_cdc_core.h"
@@ -36,7 +37,7 @@ extern struct uks uks_channels;
 int main(void)
 {
 	SystemInit();
-//	uks_channels.device_error=ERROR_NONE;
+	PWM_Init();
 
 	Power_Detector_Init();
 	Backup_SRAM_Init();
