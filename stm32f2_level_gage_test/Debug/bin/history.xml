@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="4.7.2 -mcpu=cortex-m4 -mthumb -g -nostartfiles -Map=stm32f2_level_gage_test.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\stm32f2_level_gage_test -TC:\CooCox\CoIDE\configuration\ProgramData\stm32f2_level_gage_test/link.ld -g">
+      <target file="stm32f2_level_gage_test.elf" lastModified="14cfa67d42c">
+         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="14cfa678561"/>
+         <source file="..\obj\usb_core.o" lastModified="14cfa678699"/>
+         <source file="..\obj\mbport.o" lastModified="14cfa678735"/>
+         <source file="..\obj\mb.o" lastModified="14cfa678810"/>
+         <source file="..\obj\protocol.o" lastModified="14cfa67887d"/>
+         <source file="..\obj\mbfuncdisc.o" lastModified="14cfa67891a"/>
+         <source file="..\obj\usbd_usr.o" lastModified="14cfa678987"/>
+         <source file="..\obj\portevent.o" lastModified="14cfa6789e5"/>
+         <source file="..\obj\buzzer.o" lastModified="14cfa678a62"/>
+         <source file="..\obj\mbfuncother.o" lastModified="14cfa678aee"/>
+         <source file="..\obj\stm32f4xx_usart.o" lastModified="14cfa678b8b"/>
+         <source file="..\obj\stm32f4xx_pwr.o" lastModified="14cfa678bf8"/>
+         <source file="..\obj\rtc.o" lastModified="14cfa678cb4"/>
+         <source file="..\obj\mbutils.o" lastModified="14cfa678d5f"/>
+         <source file="..\obj\startup_stm32f4xx.o" lastModified="14cfa66409c"/>
+         <source file="..\obj\backup_sram.o" lastModified="14cfa678ddc"/>
+         <source file="..\obj\stm32f4xx_iwdg.o" lastModified="14cfa678e59"/>
+         <source file="..\obj\mbfuncholding.o" lastModified="14cfa678ee6"/>
+         <source file="..\obj\usbd_core.o" lastModified="14cfa678f82"/>
+         <source file="..\obj\main.o" lastModified="14cfa67d1bb"/>
+         <source file="..\obj\mbcrc.o" lastModified="14cfa6790ca"/>
+         <source file="..\obj\stm32f4xx_rcc.o" lastModified="14cfa679186"/>
+         <source file="..\obj\level_gage_test.o" lastModified="14cfa6792fd"/>
+         <source file="..\obj\timers.o" lastModified="14cfa664697"/>
+         <source file="..\obj\stm32f4xx_adc.o" lastModified="14cfa6793c8"/>
+         <source file="..\obj\mbfuncinput.o" lastModified="14cfa679445"/>
+         <source file="..\obj\watchdog.o" lastModified="14cfa6794b2"/>
+         <source file="..\obj\mbfuncdiag.o" lastModified="14cfa66485c"/>
+         <source file="..\obj\tasks.o" lastModified="14cfa664966"/>
+         <source file="..\obj\usbd_desc.o" lastModified="14cfa679520"/>
+         <source file="..\obj\keyboard.o" lastModified="14cfa67959d"/>
+         <source file="..\obj\stm32f4xx_gpio.o" lastModified="14cfa679629"/>
+         <source file="..\obj\porttimer.o" lastModified="14cfa679697"/>
+         <source file="..\obj\usbd_cdc_vcp.o" lastModified="14cfa679704"/>
+         <source file="..\obj\list.o" lastModified="14cfa664c35"/>
+         <source file="..\obj\mbrtu.o" lastModified="14cfa6797fe"/>
+         <source file="..\obj\system_stm32f4xx.o" lastModified="14cfa67989a"/>
+         <source file="..\obj\syscalls.o" lastModified="14cfa664e09"/>
+         <source file="..\obj\adc.o" lastModified="14cfa679946"/>
+         <source file="..\obj\usb_bsp.o" lastModified="14cfa6799d3"/>
+         <source file="..\obj\usbd_req.o" lastModified="14cfa679a7f"/>
+         <source file="..\obj\queue.o" lastModified="14cfa66509a"/>
+         <source file="..\obj\port.o" lastModified="14cfa6650e8"/>
+         <source file="..\obj\usb_dcd_int.o" lastModified="14cfa679b4a"/>
+         <source file="..\obj\portserial.o" lastModified="14cfa679c34"/>
+         <source file="..\obj\usbd_cdc_core.o" lastModified="14cfa679d0f"/>
+         <source file="..\obj\croutine.o" lastModified="14cfa665424"/>
+         <source file="..\obj\stm32f4xx_spi.o" lastModified="14cfa679dab"/>
+         <source file="..\obj\mbfunccoils.o" lastModified="14cfa679e38"/>
+         <source file="..\obj\stm32f4xx_exti.o" lastModified="14cfa679ea5"/>
+         <source file="..\obj\misc.o" lastModified="14cfa679f13"/>
+         <source file="..\obj\usb_dcd.o" lastModified="14cfa679faf"/>
+         <source file="..\obj\heap_1.o" lastModified="14cfa665731"/>
+         <source file="..\obj\stm32f4xx_rtc.o" lastModified="14cfa67a0b9"/>
+         <source file="..\obj\usbd_ioreq.o" lastModified="14cfa67a136"/>
+         <source file="..\obj\mbascii.o" lastModified="14cfa67a1a3"/>
+         <source file="..\obj\stm32f4xx_tim.o" lastModified="14cfa67a2db"/>
+         <source file="..\obj\power_detector.o" lastModified="14cfa67a349"/>
+      </target>
+   </processor>
+</history>
