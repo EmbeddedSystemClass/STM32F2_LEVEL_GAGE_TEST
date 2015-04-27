@@ -39,7 +39,7 @@ void Keyboard_Init(void)
 	xTaskCreate(vKeyboardTask,(signed char*)"Keyboard",64,NULL, tskIDLE_PRIORITY + 1, NULL);
 }
 
-#define PRESS_SHORT_TIME	50
+//#define PRESS_SHORT_TIME	50
 
 static void vKeyboardTask(void *pvParameters)
 {
@@ -52,61 +52,61 @@ static void vKeyboardTask(void *pvParameters)
     		vTaskDelay(10);
     		if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_0)==Bit_RESET)
     		{
-    			uint8_t i=0;
-
-    			Buzzer_Set_Buzz(BUZZER_EFFECT_0,BUZZER_OFF);
-    			//uks_channels.screen=SCREEN_CHANNELS_FIRST;
-    			for(i=0;i<DRYING_CHANNELS_NUM;i++)
-    			{
-    				if(uks_channels.drying_channel_list[i].drying_state==DRYING_DONE)
-    				{
-    					uks_channels.drying_channel_list[i].drying_state=DRYING_WAIT_NEW_OPERATION;
-    				}
-    			}
-
-    			switch(uks_channels.screen)
-				{
-					case SCREEN_CHANNELS_FIRST:
-					{
-
-					}
-					break;
-
-					case SCREEN_INIT_HEATER:
-					{
-
-					}
-					break;
-
-					case SCREEN_CHANNELS_SECOND:
-					{
-						//uks_channels.screen=SCREEN_CHANNELS_FIRST;
-					}
-					break;
-
-					case SCREEN_HEATER:
-					{
-						//uks_channels.screen=SCREEN_CHANNELS_FIRST;
-					}
-					break;
-
-					case SCREEN_ERROR:
-					{
-
-					}
-					break;
-
-					case SCREEN_HEATER_INIT_TIMEOUT:
-					{
-
-					}
-					break;
-
-					default:
-					{
-						uks_channels.screen=SCREEN_CHANNELS_FIRST;
-					}
-				}
+//    			uint8_t i=0;
+//
+//    			Buzzer_Set_Buzz(BUZZER_EFFECT_0,BUZZER_OFF);
+//    			//uks_channels.screen=SCREEN_CHANNELS_FIRST;
+//    			for(i=0;i<DRYING_CHANNELS_NUM;i++)
+//    			{
+//    				if(uks_channels.drying_channel_list[i].drying_state==DRYING_DONE)
+//    				{
+//    					uks_channels.drying_channel_list[i].drying_state=DRYING_WAIT_NEW_OPERATION;
+//    				}
+//    			}
+//
+//    			switch(uks_channels.screen)
+//				{
+//					case SCREEN_CHANNELS_FIRST:
+//					{
+//
+//					}
+//					break;
+//
+//					case SCREEN_INIT_HEATER:
+//					{
+//
+//					}
+//					break;
+//
+//					case SCREEN_CHANNELS_SECOND:
+//					{
+//						//uks_channels.screen=SCREEN_CHANNELS_FIRST;
+//					}
+//					break;
+//
+//					case SCREEN_HEATER:
+//					{
+//						//uks_channels.screen=SCREEN_CHANNELS_FIRST;
+//					}
+//					break;
+//
+//					case SCREEN_ERROR:
+//					{
+//
+//					}
+//					break;
+//
+//					case SCREEN_HEATER_INIT_TIMEOUT:
+//					{
+//
+//					}
+//					break;
+//
+//					default:
+//					{
+//						uks_channels.screen=SCREEN_CHANNELS_FIRST;
+//					}
+//				}
     		}
     	}
 
@@ -115,108 +115,108 @@ static void vKeyboardTask(void *pvParameters)
     		vTaskDelay(10);
     		if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_1)==Bit_RESET)
     		{
-    			press_time_counter++;
-
-    			if(press_time_counter>PRESS_SHORT_TIME)
-    			{
-    				//uks_channels.screen=SCREEN_HEATER;
-
-    				switch(uks_channels.screen)
-    				{
-    					case SCREEN_CHANNELS_FIRST:
-    					{
-    						uks_channels.screen=SCREEN_HEATER;
-    					}
-    					break;
-
-    					case SCREEN_INIT_HEATER:
-    					{
-
-    					}
-    					break;
-
-    					case SCREEN_CHANNELS_SECOND:
-    					{
-    						uks_channels.screen=SCREEN_HEATER;
-    					}
-    					break;
-
-    					case SCREEN_HEATER:
-    					{
-
-    					}
-    					break;
-
-    					case SCREEN_ERROR:
-    					{
-
-    					}
-    					break;
-
-    					case SCREEN_HEATER_INIT_TIMEOUT:
-    					{
-
-    					}
-    					break;
-
-    					default:
-    					{
-    						uks_channels.screen=SCREEN_CHANNELS_FIRST;
-    					}
-    				}
-    			}
+//    			press_time_counter++;
+//
+//    			if(press_time_counter>PRESS_SHORT_TIME)
+//    			{
+//    				//uks_channels.screen=SCREEN_HEATER;
+//
+//    				switch(uks_channels.screen)
+//    				{
+//    					case SCREEN_CHANNELS_FIRST:
+//    					{
+//    						uks_channels.screen=SCREEN_HEATER;
+//    					}
+//    					break;
+//
+//    					case SCREEN_INIT_HEATER:
+//    					{
+//
+//    					}
+//    					break;
+//
+//    					case SCREEN_CHANNELS_SECOND:
+//    					{
+//    						uks_channels.screen=SCREEN_HEATER;
+//    					}
+//    					break;
+//
+//    					case SCREEN_HEATER:
+//    					{
+//
+//    					}
+//    					break;
+//
+//    					case SCREEN_ERROR:
+//    					{
+//
+//    					}
+//    					break;
+//
+//    					case SCREEN_HEATER_INIT_TIMEOUT:
+//    					{
+//
+//    					}
+//    					break;
+//
+//    					default:
+//    					{
+//    						uks_channels.screen=SCREEN_CHANNELS_FIRST;
+//    					}
+//    				}
+//    			}
     		}
     	}
-    	else
-    	{
-    		if((press_time_counter>0)&&(press_time_counter<=PRESS_SHORT_TIME))
-    		{
-				switch(uks_channels.screen)
-				{
-					case SCREEN_CHANNELS_FIRST:
-					{
-						uks_channels.screen=SCREEN_CHANNELS_SECOND;
-					}
-					break;
-
-					case SCREEN_INIT_HEATER:
-					{
-
-					}
-					break;
-
-					case SCREEN_CHANNELS_SECOND:
-					{
-						uks_channels.screen=SCREEN_CHANNELS_FIRST;
-					}
-					break;
-
-					case SCREEN_HEATER:
-					{
-						uks_channels.screen=SCREEN_CHANNELS_FIRST;
-					}
-					break;
-
-					case SCREEN_ERROR:
-					{
-
-					}
-					break;
-
-					case SCREEN_HEATER_INIT_TIMEOUT:
-					{
-
-					}
-					break;
-
-					default:
-					{
-						uks_channels.screen=SCREEN_CHANNELS_FIRST;
-					}
-				}
-    		}
-    		press_time_counter=0;
-    	}
+//    	else
+//    	{
+//    		if((press_time_counter>0)&&(press_time_counter<=PRESS_SHORT_TIME))
+//    		{
+//				switch(uks_channels.screen)
+//				{
+//					case SCREEN_CHANNELS_FIRST:
+//					{
+//						uks_channels.screen=SCREEN_CHANNELS_SECOND;
+//					}
+//					break;
+//
+//					case SCREEN_INIT_HEATER:
+//					{
+//
+//					}
+//					break;
+//
+//					case SCREEN_CHANNELS_SECOND:
+//					{
+//						uks_channels.screen=SCREEN_CHANNELS_FIRST;
+//					}
+//					break;
+//
+//					case SCREEN_HEATER:
+//					{
+//						uks_channels.screen=SCREEN_CHANNELS_FIRST;
+//					}
+//					break;
+//
+//					case SCREEN_ERROR:
+//					{
+//
+//					}
+//					break;
+//
+//					case SCREEN_HEATER_INIT_TIMEOUT:
+//					{
+//
+//					}
+//					break;
+//
+//					default:
+//					{
+//						uks_channels.screen=SCREEN_CHANNELS_FIRST;
+//					}
+//				}
+//    		}
+//    		press_time_counter=0;
+//    	}
     	task_watches[KEYBOARD_TASK].counter++;
     }
 }

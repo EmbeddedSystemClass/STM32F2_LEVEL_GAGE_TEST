@@ -16,17 +16,17 @@ void Backup_SRAM_Write_Reg(void *backup_reg, void *source_reg,uint8_t reg_size)
 {
 	  uint8_t i=0;
 
-	  uint8_t *back_crc=(uint8_t*)(BKPSRAM_BASE+sizeof(struct uks_parameters));
+//	  uint8_t *back_crc=(uint8_t*)(BKPSRAM_BASE+sizeof(struct uks_parameters));
 
 	  PWR_BackupAccessCmd(ENABLE);        // set PWR->CR.dbp = 1;
 	  PWR_BackupRegulatorCmd(ENABLE);     // set PWR->CSR.bre = 1;
 
-	  for(i=0;i<reg_size;i++)
-	  {
-		  *((uint8_t*)backup_reg+i)=*((uint8_t*)source_reg+i);
-	  }
-
-	  *back_crc=CRC_Check((uint8_t*)(uks_channels.backup_uks_params),sizeof(struct uks_parameters));
+//	  for(i=0;i<reg_size;i++)
+//	  {
+//		  *((uint8_t*)backup_reg+i)=*((uint8_t*)source_reg+i);
+//	  }
+//
+//	  *back_crc=CRC_Check((uint8_t*)(uks_channels.backup_uks_params),sizeof(struct uks_parameters));
 	  PWR_BackupAccessCmd(DISABLE);                     // reset PWR->CR.dbp = 0;
 }
 

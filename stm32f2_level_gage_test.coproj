@@ -102,6 +102,7 @@
     <File name="modbus/mb.c" path="modbus/mb.c" type="1"/>
     <File name="FreeRTOSV7.1.0/Source/include/task.h" path="FreeRTOSV7.1.0/Source/include/task.h" type="1"/>
     <File name="FreeRTOSV7.1.0/Source/include/FreeRTOS.h" path="FreeRTOSV7.1.0/Source/include/FreeRTOS.h" type="1"/>
+    <File name="devices/pwm.h" path="devices/pwm.h" type="1"/>
     <File name="usblib/usbd_desc.h" path="usblib/usbd_desc.h" type="1"/>
     <File name="modbus/include/mbproto.h" path="modbus/include/mbproto.h" type="1"/>
     <File name="devices" path="" type="2"/>
@@ -127,8 +128,8 @@
     <File name="usblib/usbd_conf_template.h" path="usblib/usbd_conf_template.h" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_pwr.h" path="cmsis_lib/include/stm32f4xx_pwr.h" type="1"/>
     <File name="cmsis_boot/startup/startup_stm32f4xx.c" path="cmsis_boot/startup/startup_stm32f4xx.c" type="1"/>
-    <File name="devices/adc.c" path="devices/adc.c" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_rcc.c" path="cmsis_lib/source/stm32f4xx_rcc.c" type="1"/>
+    <File name="devices/adc.c" path="devices/adc.c" type="1"/>
     <File name="usblib/usbd_cdc_vcp.h" path="usblib/usbd_cdc_vcp.h" type="1"/>
     <File name="cmsis/core_cmInstr.h" path="cmsis/core_cmInstr.h" type="1"/>
     <File name="usblib/usbd_desc.c" path="usblib/usbd_desc.c" type="1"/>
@@ -150,6 +151,7 @@
     <File name="usblib/usb_conf_template.h" path="usblib/usb_conf_template.h" type="1"/>
     <File name="modbus/functions/mbfuncdiag.c" path="modbus/functions/mbfuncdiag.c" type="1"/>
     <File name="cmsis_lib" path="" type="2"/>
+    <File name="devices/pwm.c" path="devices/pwm.c" type="1"/>
     <File name="FreeRTOSV7.1.0/Source/portable/ARM_CM3/port.c" path="FreeRTOSV7.1.0/Source/portable/ARM_CM3/port.c" type="1"/>
     <File name="devices/power_detector.h" path="devices/power_detector.h" type="1"/>
     <File name="modbus" path="" type="2"/>
