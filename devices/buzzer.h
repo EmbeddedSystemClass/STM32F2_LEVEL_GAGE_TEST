@@ -36,8 +36,8 @@ enum
 	BUZZER_EFFECT_NONE
 };
 
-#define BUZZER_PIN	GPIO_Pin_10
-#define BUZZER_PORT GPIOB
+#define BUZZER_PIN	GPIO_Pin_7
+#define BUZZER_PORT GPIOC
 
 struct buzzer{
 	uint8_t buzzer_enable;//

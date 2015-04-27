@@ -20,7 +20,6 @@ xTaskHandle xBuzzer_Handle;
 
 void Buzzer_Init(void)
 {
-    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
 
     GPIO_InitTypeDef GPIO_InitStructure;

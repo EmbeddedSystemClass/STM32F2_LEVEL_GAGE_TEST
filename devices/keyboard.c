@@ -30,7 +30,7 @@ void Keyboard_Init(void)
 	RCC_AHB1PeriphClockCmd(INIT_KEYB_PORT, ENABLE);
 	GPIO_InitTypeDef init_pin;
 
-	init_pin.GPIO_Pin  = KEY_0 | KEY_1;//подт€гиваем вверх, дл€ уменьшени€ помех
+	init_pin.GPIO_Pin  = KEY_0 | KEY_1  | KEY_2;//подт€гиваем вверх, дл€ уменьшени€ помех
 	init_pin.GPIO_Speed = GPIO_Speed_2MHz;
 	init_pin.GPIO_Mode  = GPIO_Mode_IN;
 	init_pin.GPIO_PuPd = GPIO_PuPd_UP;

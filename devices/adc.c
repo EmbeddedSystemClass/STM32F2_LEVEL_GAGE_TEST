@@ -17,11 +17,13 @@
 
 #include "watchdog.h"
 
+#define ADC_CHN_SENSOR		0
+#define ADC_CHN_VELOCITY_1	11
+#define ADC_CHN_VELOCITY_2	13
 
-struct adc_lm35_channels adc_lm35_chnl;
-extern struct uks uks_channels;
+xSemaphoreHandle xMeasure_Semaphore;
 
-xSemaphoreHandle xMeasure_LM35_Semaphore;
+st_adc_channels adc_channels;
 
 extern struct task_watch task_watches[];
 
@@ -36,12 +38,18 @@ void ADC_Channel_Init(void)
 	   ADC_CommonStructInit(&ADC_CommonInitStructure);
 
 	   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+	   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
 
 	   GPIO_InitTypeDef gpio;
 	   GPIO_StructInit(&gpio);
 	   gpio.GPIO_Mode = GPIO_Mode_AN;
-	   gpio.GPIO_Pin = GPIO_Pin_0|GPIO_Pin_1|GPIO_Pin_2|GPIO_Pin_3|GPIO_Pin_4|GPIO_Pin_5|GPIO_Pin_6|GPIO_Pin_7;
+	   gpio.GPIO_Pin = GPIO_Pin_0;
 	   GPIO_Init(GPIOA, &gpio);
+
+	   GPIO_StructInit(&gpio);
+	   gpio.GPIO_Mode = GPIO_Mode_AN;
+	   gpio.GPIO_Pin = GPIO_Pin_1|GPIO_Pin_3;
+	   GPIO_Init(GPIOC, &gpio);
 
 	   /* разрешаем тактирование AЦП1 */
 	   RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
@@ -64,67 +72,69 @@ void ADC_Channel_Init(void)
 
 	   ADC_RegularChannelConfig(ADC1, ADC_Channel_0, 1, ADC_SampleTime_480Cycles);
 
-
-	   /* Включаем АЦП1 */
 	   ADC_Cmd(ADC1, ENABLE);
-	   vSemaphoreCreateBinary( xMeasure_LM35_Semaphore );
+	   vSemaphoreCreateBinary( xMeasure_Semaphore );
 	   xTaskCreate(ADC_Task,(signed char*)"ADC",128,NULL, tskIDLE_PRIORITY + 1, NULL);
-}
-
-#define SWAP(A, B) { uint16_t t = A; A = B; B = t; }
-
-void bubblesort(uint16_t *a, uint16_t n)
-{
-  uint16_t i, j;
-
-  for (i = n - 1; i > 0; i--)
-  {
-    for (j = 0; j < i; j++)
-    {
-      if (a[j] > a[j + 1])
-        SWAP( a[j], a[j + 1] );
-    }
-  }
 }
 
 #define NUM_CONV	16
 #define MAX_ADC_CODE 	4095
 #define MAX_ADC_VOLTAGE	3.3
-#define LM35_V_FOR_C	0.01
+
 
 static void ADC_Task(void *pvParameters)
 {
-		uint8_t i=0,j=0;
+		uint8_t i=0;
+		uint32_t  sum_adc;
 		task_watches[ADC_TASK].task_status=TASK_ACTIVE;
+
 		while(1)
 		{
-			  for(i=0;i<ADC_FILTER_BUFFER_LEN;i++)
+			  sum_adc=0;
+			  for(i=0;i<NUM_CONV;i++)
 			  {
-				   for(j=0;j<ADC_LM35_CHANNELS_NUM;j++)
+				   ADC_RegularChannelConfig(ADC1, ADC_CHN_SENSOR, 1, ADC_SampleTime_480Cycles);
+				   ADC1->CR2 |= (uint32_t)ADC_CR2_SWSTART;
+				   while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET)
 				   {
-					   ADC_RegularChannelConfig(ADC1, j, 1, ADC_SampleTime_480Cycles);
-					   ADC1->CR2 |= (uint32_t)ADC_CR2_SWSTART;
-					   while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET)
-					   {
-						   taskYIELD ();
-					   }
-					   adc_lm35_chnl.filter_buffer[j][i]=ADC1->DR;
-
+					   taskYIELD ();
 				   }
+				   sum_adc+=ADC1->DR;
 			  }
 
-			   for(j=0;j<ADC_LM35_CHANNELS_NUM;j++)
-			   {
-				   bubblesort(adc_lm35_chnl.filter_buffer[j],ADC_FILTER_BUFFER_LEN);
-				   adc_lm35_chnl.channel[j]=((adc_lm35_chnl.filter_buffer[j][(ADC_FILTER_BUFFER_LEN>>1)-1]+adc_lm35_chnl.filter_buffer[j][ADC_FILTER_BUFFER_LEN>>1])>>1);
+			  adc_channels.level_sensor=(uint16_t)(sum_adc/NUM_CONV);
 
-				   uks_channels.drying_channel_list[j].temperature_queue_counter++;
-				   uks_channels.drying_channel_list[j].temperature_queue_counter&=(TEMPERATURE_QUEUE_LEN-1);
-				   uks_channels.drying_channel_list[j].temperature=uks_channels.drying_channel_list[j].temperature_queue[uks_channels.drying_channel_list[j].temperature_queue_counter]=(float)adc_lm35_chnl.channel[j]/MAX_ADC_CODE*MAX_ADC_VOLTAGE/LM35_V_FOR_C;
-			   }
+			  sum_adc=0;
+			  for(i=0;i<NUM_CONV;i++)
+			  {
+				   ADC_RegularChannelConfig(ADC1, ADC_CHN_VELOCITY_1, 1, ADC_SampleTime_480Cycles);
+				   ADC1->CR2 |= (uint32_t)ADC_CR2_SWSTART;
+				   while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET)
+				   {
+					   taskYIELD ();
+				   }
+				   sum_adc+=ADC1->DR;
+			  }
 
-			  xSemaphoreGive(xMeasure_LM35_Semaphore);
-			  vTaskDelay(1000);
+			  adc_channels.velocity[0]=(uint16_t)(sum_adc/NUM_CONV);
+
+			  sum_adc=0;
+			  for(i=0;i<NUM_CONV;i++)
+			  {
+				   ADC_RegularChannelConfig(ADC1, ADC_CHN_VELOCITY_2, 1, ADC_SampleTime_480Cycles);
+				   ADC1->CR2 |= (uint32_t)ADC_CR2_SWSTART;
+				   while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET)
+				   {
+					   taskYIELD ();
+				   }
+				   sum_adc+=ADC1->DR;
+			  }
+
+			  adc_channels.velocity[1]=(uint16_t)(sum_adc/NUM_CONV);
+
+
+			 // xSemaphoreGive(xMeasure_Semaphore);
+			  vTaskDelay(100);
 			  task_watches[ADC_TASK].counter++;
 		}
 }

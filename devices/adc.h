@@ -7,12 +7,11 @@
 #define ADC_LM35_CHANNELS_NUM 	DRYING_CHANNELS_NUM
 #define ADC_FILTER_BUFFER_LEN	16
 
-struct adc_lm35_channels
+typedef struct
 {
-	uint16_t channel[ADC_LM35_CHANNELS_NUM];
-	uint16_t filter_buffer[ADC_LM35_CHANNELS_NUM][ADC_FILTER_BUFFER_LEN];
-
-};
+	uint16_t velocity[2];
+	uint16_t level_sensor;
+} st_adc_channels;
 
 void ADC_Channel_Init(void);
 
