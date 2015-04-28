@@ -21,7 +21,7 @@
 #define ADC_CHN_VELOCITY_1	11
 #define ADC_CHN_VELOCITY_2	13
 
-xSemaphoreHandle xMeasure_Semaphore;
+xSemaphoreHandle xADC_Mutex;
 
 st_adc_channels adc_channels;
 
@@ -73,7 +73,7 @@ void ADC_Channel_Init(void)
 	   ADC_RegularChannelConfig(ADC1, ADC_Channel_0, 1, ADC_SampleTime_480Cycles);
 
 	   ADC_Cmd(ADC1, ENABLE);
-	   vSemaphoreCreateBinary( xMeasure_Semaphore );
+	   xADC_Mutex=xSemaphoreCreateMutex();
 	   xTaskCreate(ADC_Task,(signed char*)"ADC",128,NULL, tskIDLE_PRIORITY + 1, NULL);
 }
 
@@ -85,12 +85,12 @@ void ADC_Channel_Init(void)
 static void ADC_Task(void *pvParameters)
 {
 		uint8_t i=0;
-		uint32_t  sum_adc;
+		uint32_t  sum_adc_level_sensor, sum_adc_velocity_0, sum_adc_velocity_1;
 		task_watches[ADC_TASK].task_status=TASK_ACTIVE;
 
 		while(1)
 		{
-			  sum_adc=0;
+			  sum_adc_level_sensor=0;
 			  for(i=0;i<NUM_CONV;i++)
 			  {
 				   ADC_RegularChannelConfig(ADC1, ADC_CHN_SENSOR, 1, ADC_SampleTime_480Cycles);
@@ -99,12 +99,10 @@ static void ADC_Task(void *pvParameters)
 				   {
 					   taskYIELD ();
 				   }
-				   sum_adc+=ADC1->DR;
+				   sum_adc_level_sensor+=ADC1->DR;
 			  }
 
-			  adc_channels.level_sensor=(uint16_t)(sum_adc/NUM_CONV);
-
-			  sum_adc=0;
+			  sum_adc_velocity_0=0;
 			  for(i=0;i<NUM_CONV;i++)
 			  {
 				   ADC_RegularChannelConfig(ADC1, ADC_CHN_VELOCITY_1, 1, ADC_SampleTime_480Cycles);
@@ -113,12 +111,10 @@ static void ADC_Task(void *pvParameters)
 				   {
 					   taskYIELD ();
 				   }
-				   sum_adc+=ADC1->DR;
+				   sum_adc_velocity_0+=ADC1->DR;
 			  }
 
-			  adc_channels.velocity[0]=(uint16_t)(sum_adc/NUM_CONV);
-
-			  sum_adc=0;
+			  sum_adc_velocity_1=0;
 			  for(i=0;i<NUM_CONV;i++)
 			  {
 				   ADC_RegularChannelConfig(ADC1, ADC_CHN_VELOCITY_2, 1, ADC_SampleTime_480Cycles);
@@ -127,14 +123,18 @@ static void ADC_Task(void *pvParameters)
 				   {
 					   taskYIELD ();
 				   }
-				   sum_adc+=ADC1->DR;
+				   sum_adc_velocity_1+=ADC1->DR;
 			  }
 
-			  adc_channels.velocity[1]=(uint16_t)(sum_adc/NUM_CONV);
+			 xSemaphoreTake( xADC_Mutex, portMAX_DELAY );
+			 {
+				  adc_channels.level_sensor=(uint16_t)(sum_adc_level_sensor/NUM_CONV);
+				  adc_channels.velocity[0]=(uint16_t)(sum_adc_velocity_0/NUM_CONV);
+				  adc_channels.velocity[1]=(uint16_t)(sum_adc_velocity_1/NUM_CONV);
+			 }
+			 xSemaphoreGive( xADC_Mutex );
 
-
-			 // xSemaphoreGive(xMeasure_Semaphore);
-			  vTaskDelay(100);
-			  task_watches[ADC_TASK].counter++;
+			 vTaskDelay(100);
+			 task_watches[ADC_TASK].counter++;
 		}
 }

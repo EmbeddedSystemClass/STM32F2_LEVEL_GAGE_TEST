@@ -14,9 +14,12 @@
 #include "watchdog.h"
 #include "level_gage_test.h"
 
-struct buzzer buzz;
 extern struct task_watch task_watches[];
 xTaskHandle xBuzzer_Handle;
+
+uint8_t buzzer_effect=BUZZER_EFFECT_NONE;
+
+void Buzzer_Task(void *pvParameters );
 
 void Buzzer_Init(void)
 {
@@ -35,120 +38,48 @@ void Buzzer_Init(void)
 
     GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
 
-    xTaskCreate(Buzzer_Task,(signed char*)"BUZZER",64,NULL, tskIDLE_PRIORITY + 1, &xBuzzer_Handle);
-//    task_watches[BUZZER_TASK].task_status=TASK_IDLE;
+//    xTaskCreate(Buzzer_Task,(signed char*)"BUZZER",64,NULL, tskIDLE_PRIORITY + 1, &xBuzzer_Handle);
 }
+
 void Buzzer_Task(void *pvParameters )
 {
 	while(1)
 	{
-		if(buzz.buzzer_enable==BUZZER_ON)
+		switch(buzzer_effect)
 		{
-			switch(buzz.buzzer_effect)
+			case BUZZER_EFFECT_0:
 			{
-				case BUZZER_EFFECT_0:
-				{
-					GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,1);
-					vTaskDelay(500);
-					GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
-					vTaskDelay(500);
-				}
-				break;
-
-				case BUZZER_EFFECT_1:
-				{
-					GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,1);
-					vTaskDelay(100);
-					GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
-					vTaskDelay(200);
-				}
-				break;
-
-				case BUZZER_EFFECT_2:
-				{
-					GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,1);
-					vTaskDelay(100);
-					GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
-					vTaskDelay(200);
-				}
-				break;
-
-				case BUZZER_EFFECT_3:
-				{
-					GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,1);
-					vTaskDelay(100);
-					GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
-					vTaskDelay(200);
-				}
-				break;
-
-				case BUZZER_EFFECT_4:
-				{
-					GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,1);
-					vTaskDelay(100);
-					GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
-					vTaskDelay(200);
-				}
-				break;
-
-				case BUZZER_EFFECT_5:
-				{
-					GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,1);
-					vTaskDelay(100);
-					GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
-					vTaskDelay(200);
-				}
-				break;
-
-				case BUZZER_EFFECT_6:
-				{
-					GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,1);
-					vTaskDelay(100);
-					GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
-					vTaskDelay(200);
-				}
-				break;
-
-				case BUZZER_EFFECT_7:
-				{
-					GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,1);
-					vTaskDelay(100);
-					GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
-					vTaskDelay(200);
-				}
-				break;
-
-				default:
-				{
-					vTaskDelay(500);
-				}
+				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
+				vTaskDelay(500);
+				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,1);
 			}
+			break;
+
+			case BUZZER_EFFECT_1:
+			{
+				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
+				vTaskDelay(300);
+				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,1);
+				vTaskDelay(300);
+				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
+				vTaskDelay(300);
+				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,1);
+			}
+			break;
 		}
+
 		task_watches[BUZZER_TASK].counter++;
+		task_watches[BUZZER_TASK].task_status=TASK_IDLE;
+		buzzer_effect=BUZZER_EFFECT_NONE;
+
+		vTaskSuspend (xBuzzer_Handle);
 	}
 }
 
 
-void Buzzer_Set_Buzz(uint8_t effect, uint8_t enable)
+void Buzzer_Set_Buzz(uint8_t effect)
 {
-	if(enable&0x1)
-	{
-		if(buzz.buzzer_enable==BUZZER_OFF)
-		{
-			vTaskResume(xBuzzer_Handle);
-			buzz.buzzer_enable=BUZZER_ON;
-		}
-		task_watches[BUZZER_TASK].task_status=TASK_ACTIVE;
-	}
-	else
-	{
-		if(buzz.buzzer_enable==BUZZER_ON)
-		{
-			vTaskSuspend (xBuzzer_Handle);
-			buzz.buzzer_enable=BUZZER_OFF;
-		}
-		task_watches[BUZZER_TASK].task_status=TASK_IDLE;
-		GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
-	}
-	buzz.buzzer_effect=effect&0x7;
+	vTaskResume(xBuzzer_Handle);
+	task_watches[BUZZER_TASK].task_status=TASK_ACTIVE;
+	buzzer_effect=effect&0x7;
 }

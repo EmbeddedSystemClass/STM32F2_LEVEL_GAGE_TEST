@@ -39,22 +39,19 @@ int main(void)
 	SystemInit();
 	PWM_Init();
 
-	Power_Detector_Init();
-	Backup_SRAM_Init();
+//	Power_Detector_Init();
 
-	ADC_Channel_Init();
-
-//	UKS_Restore_Settings();
+//	ADC_Channel_Init();
 
 
 	Buzzer_Init();
-	Keyboard_Init();
-	USBD_Init(&USB_OTG_dev,USB_OTG_FS_CORE_ID,&USR_desc,&USBD_CDC_cb,&USR_cb);
-
-
-	Protocol_Init();
-
-	Watchdog_Init();
+//	Keyboard_Init();
+//	USBD_Init(&USB_OTG_dev,USB_OTG_FS_CORE_ID,&USR_desc,&USBD_CDC_cb,&USR_cb);
+//
+//
+//	Protocol_Init();
+//
+//	Watchdog_Init();
 
     vTaskStartScheduler();
 

@@ -5,20 +5,17 @@
 
 enum
 {
-	DRYING_CONTINUE=0,
-	DRYING_DONE,
-	DRYING_WAIT_NEW_OPERATION
+	TEST_STATE_STOP=0,
+	TEST_STATE_GET_UP,
+	TEST_STATE_GET_DOWN,
+	TEST_STATE_CYCLE,
 };
 
-struct parameters
+typedef struct
 {
+	uint8_t state;
 
-};
-
-struct level_gage_test
-{
-
-};
+} st_level_gage_test;
 
 void Level_Gage_Test_Init(void);
 void Level_Gage_Test_Restore_Settings(void);
