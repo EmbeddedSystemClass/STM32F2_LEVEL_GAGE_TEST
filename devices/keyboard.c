@@ -9,10 +9,7 @@
 #include "keyboard.h"
 //Инклуды от FreeRTOS:
 
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
-#include "semphr.h"
+
 
 #include "buzzer.h"
 #include "level_gage_test.h"
@@ -30,7 +27,17 @@ enum
 	KEY_PRESSED=0,
 	KEY_RELEASED,
 };
+
+enum
+{
+	KBD_0=0,
+	KBD_1,
+	KBD_2,
+};
+
 uint8_t key_flags[3];
+
+xQueueHandle xKeyQueue;
 
 void Keyboard_Init(void)
 {
@@ -47,6 +54,7 @@ void Keyboard_Init(void)
 	key_flags[1]=KEY_RELEASED;
 	key_flags[2]=KEY_RELEASED;
 
+	xKeyQueue=xQueueCreate( 4, sizeof( uint8_t ) );
 	xTaskCreate(vKeyboardTask,(signed char*)"Keyboard",64,NULL, tskIDLE_PRIORITY + 1, NULL);
 }
 
@@ -54,6 +62,7 @@ void Keyboard_Init(void)
 static void vKeyboardTask(void *pvParameters)
 {
 	task_watches[KEYBOARD_TASK].task_status=TASK_ACTIVE;
+	uint8_t key_code;
     while(1)
     {
     	if((GPIO_ReadInputDataBit(KEYB_PORT,KEY_0)==Bit_RESET)&&(key_flags[0]==KEY_RELEASED))
@@ -61,21 +70,8 @@ static void vKeyboardTask(void *pvParameters)
     		vTaskDelay(10);
     		if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_0)==Bit_RESET)
     		{
-    			Buzzer_Set_Buzz(BUZZER_EFFECT_0);
-
-    			switch(level_gage_test.state)
-				{
-					case TEST_STATE_STOP:
-					{
-						level_gage_test.state=TEST_STATE_GET_UP;
-					}
-					break;
-
-					default:
-					{
-						level_gage_test.state=TEST_STATE_STOP;
-					}
-				}
+    			key_code=KBD_0;
+    			xQueueSend( xKeyQueue,&key_code, portMAX_DELAY );
     		}
     	}
     	else
@@ -88,21 +84,8 @@ static void vKeyboardTask(void *pvParameters)
     		vTaskDelay(10);
     		if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_1)==Bit_RESET)
     		{
-    			Buzzer_Set_Buzz(BUZZER_EFFECT_0);
-
-    			switch(level_gage_test.state)
-				{
-					case TEST_STATE_STOP:
-					{
-						level_gage_test.state=TEST_STATE_GET_DOWN;
-					}
-					break;
-
-					default:
-					{
-						level_gage_test.state=TEST_STATE_STOP;
-					}
-				}
+    			key_code=KBD_1;
+    			xQueueSend( xKeyQueue,&key_code, portMAX_DELAY );
     		}
     	}
     	else
@@ -116,21 +99,8 @@ static void vKeyboardTask(void *pvParameters)
     		vTaskDelay(10);
     		if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_2)==Bit_RESET)
     		{
-    			Buzzer_Set_Buzz(BUZZER_EFFECT_0);
-
-    			switch(level_gage_test.state)
-				{
-					case TEST_STATE_STOP:
-					{
-						level_gage_test.state=TEST_STATE_CYCLE;
-					}
-					break;
-
-					default:
-					{
-						level_gage_test.state=TEST_STATE_STOP;
-					}
-				}
+    			key_code=KBD_2;
+    			xQueueSend( xKeyQueue,&key_code, portMAX_DELAY );
     		}
     	}
     	else

@@ -9,7 +9,9 @@
 #include "queue.h"
 #include "semphr.h"
 
-#define STEP_MOTOR_ROTATE_PWM	0xFF
+#include "level_gage_test.h"
+
+#define STEP_MOTOR_ROTATE_PWM	0x7F
 #define STEP_MOTOR_ROTATE_PWM_DELAY	10
 
 #define STEP_MOTOR_HOLDING_PWM	0x5F
@@ -17,26 +19,24 @@
 #define STEP_MOTOR_PERIOD_MIN	10
 #define STEP_MOTOR_PERIOD_MAX	1000
 
+#define STEP_MOTOR_STARTING_PERIOD	200
+
 #define PHAZE_0   TIM3->CCR1
 #define PHAZE_1   TIM3->CCR2
 #define PHAZE_2   TIM4->CCR1
 #define PHAZE_3   TIM4->CCR2
 
-enum
-{
-	STEP_MOTOR_STOP=0,
-	STEP_MOTOR_ROTATE_LEFT,
-	STEP_MOTOR_ROTATE_RIGHT,
-};
-
 typedef struct
 {
-	uint16_t step_period_ms;//ms
+	uint16_t step_period;
+	uint16_t step_starting;
 	uint8_t state;
 	uint8_t cycle;
 }st_step_motor;
 
 st_step_motor step_motor;
+
+uint8_t end_switch_state;
 
 void Step_Motor_Task(void *pvParameters );
 void Step_Motor_Step(void);
@@ -47,6 +47,7 @@ void Step_Motor_Hold(void);
 void PWM_Init(void)
 {
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
 
     GPIO_InitTypeDef  GPIO_InitStructure;
 
@@ -99,13 +100,19 @@ void PWM_Init(void)
     PHAZE_2=0;
     PHAZE_3=0;
 
-    Step_Motor_Set_State(STEP_MOTOR_ROTATE_LEFT);
-    Step_Motor_Set_Step_Period(5);
+    Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
+    Step_Motor_Set_Step_Period(20);
     step_motor.cycle=0;
+    step_motor.step_starting=STEP_MOTOR_STARTING_PERIOD;
+    end_switch_state=END_SWITCH_NONE;
 
-    Step_Motor_Hold();
+    GPIO_InitStructure.GPIO_Pin =GPIO_Pin_6|GPIO_Pin_7;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-    //xTaskCreate(Step_Motor_Task,(signed char*)"STEP MOTOR TASK",64,NULL, tskIDLE_PRIORITY + 1, NULL);
+
+    xTaskCreate(Step_Motor_Task,(signed char*)"STEP MOTOR TASK",64,NULL, tskIDLE_PRIORITY + 1, NULL);
 }
 
 
@@ -113,26 +120,64 @@ void Step_Motor_Task(void *pvParameters )
 {
 	while(1)
 	{
-		vTaskDelay(step_motor.step_period_ms);
+		if((step_motor.step_starting>step_motor.step_period)&&(step_motor.state!=STEP_MOTOR_STOP))
+		{
+			step_motor.step_starting-=50;
+			vTaskDelay(step_motor.step_starting);
+		}
+		else
+		{
+			vTaskDelay(step_motor.step_period);
+		}
 
+//		if(GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_6))
+//		{
+//			end_switch_state=END_SWITCH_LOWER;
+//		}
+//		else
+//		{
+//			if(GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_7))
+//			{
+//				end_switch_state=END_SWITCH_UPPER;
+//			}
+//			else
+//			{
+//				end_switch_state=END_SWITCH_NONE;
+//			}
+//		}
 
 		switch(step_motor.state)
 		{
 			case  STEP_MOTOR_ROTATE_LEFT:
 			{
-				Step_Motor_Step_Left();
+				if(end_switch_state==END_SWITCH_UPPER)
+				{
+					step_motor.state=STEP_MOTOR_STOP;
+				}
+				else
+				{
+					Step_Motor_Step_Left();
+				}
 			}
 			break;
 
 			case  STEP_MOTOR_ROTATE_RIGHT:
 			{
-				Step_Motor_Step_Right();
+				if(end_switch_state==END_SWITCH_LOWER)
+				{
+					step_motor.state=STEP_MOTOR_STOP;
+				}
+				else
+				{
+					Step_Motor_Step_Right();
+				}
 			}
 			break;
 
 			case  STEP_MOTOR_STOP:
 			{
 				Step_Motor_Hold();
+				step_motor.step_starting=STEP_MOTOR_STARTING_PERIOD;
 			}
 			break;
 
@@ -152,7 +197,7 @@ void Step_Motor_Set_State(uint8_t state)
 
 void Step_Motor_Set_Step_Period(uint16_t period)
 {
-	step_motor.step_period_ms=period;
+	step_motor.step_period=period;
 }
 
 void Step_Motor_Step(void)
