@@ -18,9 +18,9 @@ extern xQueueHandle xKeyQueue;
 
 enum
 {
-	KBD_0=0,
-	KBD_1,
-	KBD_2,
+	KBD_CYCLE=0,
+	KBD_UP,
+	KBD_DOWN,
 };
 
 void Keyboard_Init(void);

@@ -40,21 +40,23 @@ void Level_Gage_Test_Task(void *pvParameters )
 
 		   switch(key)
 		   {
-			   case KBD_0:
+			   case KBD_CYCLE:
 			   {
-				   level_gage_test.state=TEST_STATE_GET_DOWN;
+
 			   }
 			   break;
 
-			   case KBD_1:
+			   case KBD_UP:
 			   {
 				   level_gage_test.state=TEST_STATE_GET_UP;
+				   Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
 			   }
 			   break;
 
-			   case KBD_2:
+			   case KBD_DOWN:
 			   {
-
+				   level_gage_test.state=TEST_STATE_GET_DOWN;
+				   Step_Motor_Set_State(STEP_MOTOR_ROTATE_LEFT);
 			   }
 			   break;
 
@@ -70,13 +72,13 @@ void Level_Gage_Test_Task(void *pvParameters )
 	   {
 		   case END_SWITCH_UPPER:
 		   {
-
+			   level_gage_test.state=TEST_STATE_STOP;
 		   }
 		   break;
 
 		   case END_SWITCH_LOWER:
 		   {
-
+			   level_gage_test.state=TEST_STATE_STOP;
 		   }
 		   break;
 

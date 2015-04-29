@@ -65,7 +65,7 @@ static void vKeyboardTask(void *pvParameters)
     		vTaskDelay(10);
     		if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_0)==Bit_RESET)
     		{
-    			key_code=KBD_0;
+    			key_code=KBD_CYCLE;
     			xQueueSend( xKeyQueue,&key_code, portMAX_DELAY );
     		}
     	}
@@ -79,7 +79,7 @@ static void vKeyboardTask(void *pvParameters)
     		vTaskDelay(10);
     		if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_1)==Bit_RESET)
     		{
-    			key_code=KBD_1;
+    			key_code=KBD_UP;
     			xQueueSend( xKeyQueue,&key_code, portMAX_DELAY );
     		}
     	}
@@ -94,7 +94,7 @@ static void vKeyboardTask(void *pvParameters)
     		vTaskDelay(10);
     		if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_2)==Bit_RESET)
     		{
-    			key_code=KBD_2;
+    			key_code=KBD_DOWN;
     			xQueueSend( xKeyQueue,&key_code, portMAX_DELAY );
     		}
     	}
