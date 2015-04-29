@@ -24,5 +24,6 @@ enum
 };
 
 void PWM_Init(void);
+void Step_Motor_Set_Step_Period(uint16_t period);
 
 #endif

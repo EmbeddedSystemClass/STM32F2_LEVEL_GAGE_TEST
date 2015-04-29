@@ -9,6 +9,9 @@
 #include "string.h"
 #include "buzzer.h"
 #include "watchdog.h"
+#include "keyboard.h"
+#include "adc.h"
+#include "pwm.h"
 
 
 extern struct task_watch task_watches[];
@@ -30,6 +33,62 @@ void Level_Gage_Test_Task(void *pvParameters )
 	task_watches[DRYING_TASK].task_status=TASK_ACTIVE;
 	while(1)
 	{
+	   if( uxQueueMessagesWaiting( xKeyQueue ) != 0 )
+	   {
+		   uint8_t key;
+		   xQueueReceive( xKeyQueue, &key, 0 );
+
+		   switch(key)
+		   {
+			   case KBD_0:
+			   {
+				   level_gage_test.state=TEST_STATE_GET_DOWN;
+			   }
+			   break;
+
+			   case KBD_1:
+			   {
+				   level_gage_test.state=TEST_STATE_GET_UP;
+			   }
+			   break;
+
+			   case KBD_2:
+			   {
+
+			   }
+			   break;
+
+			   default:
+			   {
+
+			   }
+			   break;
+		   }
+	   }
+//--------------------------------------------------
+	   switch(end_switch_state)
+	   {
+		   case END_SWITCH_UPPER:
+		   {
+
+		   }
+		   break;
+
+		   case END_SWITCH_LOWER:
+		   {
+
+		   }
+		   break;
+
+		   default:
+		   {
+
+		   }
+		   break;
+	   }
+//--------------------------------------------------
+
+//--------------------------------------------------
 		switch(level_gage_test.state)
 		{
 			case TEST_STATE_STOP:
@@ -40,13 +99,49 @@ void Level_Gage_Test_Task(void *pvParameters )
 
 			case TEST_STATE_GET_DOWN:
 			{
+				uint16_t velocity;
+				 xSemaphoreTake( xADC_Mutex, portMAX_DELAY );
+				 {
+					 velocity=adc_channels.velocity[1];
+				 }
+				 xSemaphoreGive( xADC_Mutex );
 
+				 velocity/=10;
+
+				 if(velocity<STEP_MOTOR_PERIOD_MIN)
+				 {
+					 velocity=STEP_MOTOR_PERIOD_MIN;
+				 }
+
+				 if(velocity>STEP_MOTOR_PERIOD_MAX)
+				 {
+					 velocity=STEP_MOTOR_PERIOD_MAX;
+				 }
+				Step_Motor_Set_Step_Period(velocity);
 			}
 			break;
 
 			case TEST_STATE_GET_UP:
 			{
+				uint16_t velocity;
+				 xSemaphoreTake( xADC_Mutex, portMAX_DELAY );
+				 {
+					 velocity=adc_channels.velocity[1];
+				 }
+				 xSemaphoreGive( xADC_Mutex );
 
+				 velocity/=10;
+
+				 if(velocity<STEP_MOTOR_PERIOD_MIN)
+				 {
+					 velocity=STEP_MOTOR_PERIOD_MIN;
+				 }
+
+				 if(velocity>STEP_MOTOR_PERIOD_MAX)
+				 {
+					 velocity=STEP_MOTOR_PERIOD_MAX;
+				 }
+				Step_Motor_Set_Step_Period(velocity);
 			}
 			break;
 

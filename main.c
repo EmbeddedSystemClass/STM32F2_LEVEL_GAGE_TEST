@@ -23,6 +23,7 @@
 
 #include "protocol.h"
 #include "pwm.h"
+#include "level_gage_test.h"
 
 #include "usbd_cdc_vcp.h"
 #include "usbd_cdc_core.h"
@@ -41,17 +42,19 @@ int main(void)
 
 //	Power_Detector_Init();
 
-//	ADC_Channel_Init();
+	ADC_Channel_Init();
 
 
 	Buzzer_Init();
-//	Keyboard_Init();
+	Keyboard_Init();
 //	USBD_Init(&USB_OTG_dev,USB_OTG_FS_CORE_ID,&USR_desc,&USBD_CDC_cb,&USR_cb);
 //
 //
 //	Protocol_Init();
 //
 //	Watchdog_Init();
+
+	Level_Gage_Test_Init();
 
     vTaskStartScheduler();
 

@@ -15,6 +15,14 @@
 #define KEY_2 GPIO_Pin_15
 
 extern xQueueHandle xKeyQueue;
+
+enum
+{
+	KBD_0=0,
+	KBD_1,
+	KBD_2,
+};
+
 void Keyboard_Init(void);
 
 

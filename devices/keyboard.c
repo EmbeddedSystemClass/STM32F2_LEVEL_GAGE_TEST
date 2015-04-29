@@ -28,12 +28,7 @@ enum
 	KEY_RELEASED,
 };
 
-enum
-{
-	KBD_0=0,
-	KBD_1,
-	KBD_2,
-};
+
 
 uint8_t key_flags[3];
 

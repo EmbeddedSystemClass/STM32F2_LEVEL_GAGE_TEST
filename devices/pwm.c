@@ -11,15 +11,7 @@
 
 #include "level_gage_test.h"
 
-#define STEP_MOTOR_ROTATE_PWM	0x7F
-#define STEP_MOTOR_ROTATE_PWM_DELAY	10
 
-#define STEP_MOTOR_HOLDING_PWM	0x5F
-
-#define STEP_MOTOR_PERIOD_MIN	10
-#define STEP_MOTOR_PERIOD_MAX	1000
-
-#define STEP_MOTOR_STARTING_PERIOD	200
 
 #define PHAZE_0   TIM3->CCR1
 #define PHAZE_1   TIM3->CCR2
