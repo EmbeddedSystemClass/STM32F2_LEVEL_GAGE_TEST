@@ -33,12 +33,20 @@ typedef enum
 	STEP_MOTOR_ROTATE_RIGHT,
 } en_step_motor_state;
 
+typedef enum
+{
+	MOVE_TYPE_MANUAL=0,
+	MOVE_TYPE_CYCLE,
+
+} en_step_motor_move_type;
+
 typedef struct
 {
 	uint16_t step_period;
 	uint16_t step_starting_counter;
 	en_step_motor_state step_motor_state;
 	en_end_switch_state end_switch_state;
+	en_step_motor_move_type step_motor_move_type;
 	uint8_t cycle_counter;
 }st_step_motor;
 
@@ -47,5 +55,6 @@ extern st_step_motor step_motor;
 void Step_Motor_Init(void);
 void Step_Motor_Set_Step_Period(uint16_t period);
 void Step_Motor_Set_State(uint8_t state);
+void Step_Motor_Set_Move_Type( en_step_motor_move_type move_type);
 
 #endif

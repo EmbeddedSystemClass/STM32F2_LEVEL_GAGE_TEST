@@ -16,6 +16,10 @@
 #define PHAZE_2   TIM4->CCR1
 #define PHAZE_3   TIM4->CCR2
 
+#define END_SWITCH_PORT			GPIOA
+#define END_SWITCH_LOWER_PIN	GPIO_Pin_6
+#define END_SWITCH_UPPER_PIN	GPIO_Pin_7
+
 st_step_motor step_motor;
 
 void Step_Motor_Task(void *pvParameters );
@@ -85,16 +89,16 @@ void Step_Motor_Init(void)
     step_motor.cycle_counter=0;
     step_motor.step_starting_counter=STEP_MOTOR_STARTING_PERIOD;
     step_motor.end_switch_state=END_SWITCH_NONE;
+    step_motor.step_motor_move_type=MOVE_TYPE_MANUAL;
 
-    GPIO_InitStructure.GPIO_Pin =GPIO_Pin_6|GPIO_Pin_7;
+    GPIO_InitStructure.GPIO_Pin =END_SWITCH_LOWER_PIN | END_SWITCH_UPPER_PIN;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
     GPIO_InitStructure.GPIO_PuPd=GPIO_PuPd_UP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
+    GPIO_Init(END_SWITCH_PORT, &GPIO_InitStructure);
 
     xTaskCreate(Step_Motor_Task,(signed char*)"STEP MOTOR TASK",64,NULL, tskIDLE_PRIORITY + 1, NULL);
 }
-
 
 void Step_Motor_Task(void *pvParameters )
 {
@@ -102,7 +106,15 @@ void Step_Motor_Task(void *pvParameters )
 	{
 		 xSemaphoreTake( xADC_Mutex, portMAX_DELAY );
 		 {
-			 step_motor.step_period=adc_channels.speed_manual_control;
+
+			 if(step_motor.step_motor_move_type==MOVE_TYPE_MANUAL)
+			 {
+				 step_motor.step_period=adc_channels.speed_manual_control;
+			 }
+			 else if(step_motor.step_motor_move_type==MOVE_TYPE_CYCLE)
+			 {
+				 step_motor.step_period=adc_channels.speed_cycle;
+			 }
 		 }
 		 xSemaphoreGive( xADC_Mutex );
 
@@ -129,13 +141,13 @@ void Step_Motor_Task(void *pvParameters )
 			vTaskDelay(step_motor.step_period);
 		}
 //------------------------------------------------
-		if(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_6)==Bit_RESET)
+		if(GPIO_ReadInputDataBit(END_SWITCH_PORT,END_SWITCH_LOWER_PIN)==Bit_RESET)
 		{
 			step_motor.end_switch_state=END_SWITCH_LOWER;
 		}
 		else
 		{
-			if(GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_7)==Bit_RESET)
+			if(GPIO_ReadInputDataBit(END_SWITCH_PORT,END_SWITCH_UPPER_PIN)==Bit_RESET)
 			{
 				step_motor.end_switch_state=END_SWITCH_UPPER;
 			}
@@ -203,6 +215,11 @@ uint8_t Step_Motor_Get_State(void)
 void Step_Motor_Set_Step_Period(uint16_t period)
 {
 	step_motor.step_period=period;
+}
+
+void Step_Motor_Set_Move_Type( en_step_motor_move_type move_type)
+{
+	step_motor.step_motor_move_type=move_type;
 }
 
 void Step_Motor_Step(void)
