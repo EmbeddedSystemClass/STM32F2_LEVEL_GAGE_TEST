@@ -42,21 +42,82 @@ void Level_Gage_Test_Task(void *pvParameters )
 		   {
 			   case KBD_CYCLE:
 			   {
+				   level_gage_test.state=TEST_STATE_CYCLE;
 
+				   switch(step_motor.step_motor_state)
+				   {
+					   case STEP_MOTOR_ROTATE_LEFT:
+					   {
+						   Step_Motor_Set_State(STEP_MOTOR_STOP);
+					   }
+					   break;
+
+					   case STEP_MOTOR_ROTATE_RIGHT:
+					   {
+						   Step_Motor_Set_State(STEP_MOTOR_STOP);
+					   }
+					   break;
+
+					   case STEP_MOTOR_STOP:
+					   {
+						   //Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
+					   }
+					   break;
+				   }
 			   }
 			   break;
 
 			   case KBD_UP:
 			   {
 				   level_gage_test.state=TEST_STATE_GET_UP;
-				   Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
+
+				   switch(step_motor.step_motor_state)
+				   {
+					   case STEP_MOTOR_ROTATE_LEFT:
+					   {
+						   Step_Motor_Set_State(STEP_MOTOR_STOP);
+					   }
+					   break;
+
+					   case STEP_MOTOR_ROTATE_RIGHT:
+					   {
+						   Step_Motor_Set_State(STEP_MOTOR_STOP);
+					   }
+					   break;
+
+					   case STEP_MOTOR_STOP:
+					   {
+						   Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
+					   }
+					   break;
+				   }
 			   }
 			   break;
 
 			   case KBD_DOWN:
 			   {
 				   level_gage_test.state=TEST_STATE_GET_DOWN;
-				   Step_Motor_Set_State(STEP_MOTOR_ROTATE_LEFT);
+
+				   switch(step_motor.step_motor_state)
+				   {
+					   case STEP_MOTOR_ROTATE_LEFT:
+					   {
+						   Step_Motor_Set_State(STEP_MOTOR_STOP);
+					   }
+					   break;
+
+					   case STEP_MOTOR_ROTATE_RIGHT:
+					   {
+						   Step_Motor_Set_State(STEP_MOTOR_STOP);
+					   }
+					   break;
+
+					   case STEP_MOTOR_STOP:
+					   {
+						   Step_Motor_Set_State(STEP_MOTOR_ROTATE_LEFT);
+					   }
+					   break;
+				   }
 			   }
 			   break;
 
@@ -68,7 +129,7 @@ void Level_Gage_Test_Task(void *pvParameters )
 		   }
 	   }
 //--------------------------------------------------
-	   switch(end_switch_state)
+	   switch(step_motor.end_switch_state)
 	   {
 		   case END_SWITCH_UPPER:
 		   {
@@ -89,8 +150,6 @@ void Level_Gage_Test_Task(void *pvParameters )
 		   break;
 	   }
 //--------------------------------------------------
-
-//--------------------------------------------------
 		switch(level_gage_test.state)
 		{
 			case TEST_STATE_STOP:
@@ -101,49 +160,13 @@ void Level_Gage_Test_Task(void *pvParameters )
 
 			case TEST_STATE_GET_DOWN:
 			{
-				uint16_t velocity;
-				 xSemaphoreTake( xADC_Mutex, portMAX_DELAY );
-				 {
-					 velocity=adc_channels.velocity[1];
-				 }
-				 xSemaphoreGive( xADC_Mutex );
 
-				 velocity/=10;
-
-				 if(velocity<STEP_MOTOR_PERIOD_MIN)
-				 {
-					 velocity=STEP_MOTOR_PERIOD_MIN;
-				 }
-
-				 if(velocity>STEP_MOTOR_PERIOD_MAX)
-				 {
-					 velocity=STEP_MOTOR_PERIOD_MAX;
-				 }
-				Step_Motor_Set_Step_Period(velocity);
 			}
 			break;
 
 			case TEST_STATE_GET_UP:
 			{
-				uint16_t velocity;
-				 xSemaphoreTake( xADC_Mutex, portMAX_DELAY );
-				 {
-					 velocity=adc_channels.velocity[1];
-				 }
-				 xSemaphoreGive( xADC_Mutex );
 
-				 velocity/=10;
-
-				 if(velocity<STEP_MOTOR_PERIOD_MIN)
-				 {
-					 velocity=STEP_MOTOR_PERIOD_MIN;
-				 }
-
-				 if(velocity>STEP_MOTOR_PERIOD_MAX)
-				 {
-					 velocity=STEP_MOTOR_PERIOD_MAX;
-				 }
-				Step_Motor_Set_Step_Period(velocity);
 			}
 			break;
 

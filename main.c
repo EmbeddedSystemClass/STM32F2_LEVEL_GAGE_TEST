@@ -38,7 +38,7 @@ extern struct uks uks_channels;
 int main(void)
 {
 	SystemInit();
-	PWM_Init();
+	Step_Motor_Init();
 
 //	Power_Detector_Init();
 

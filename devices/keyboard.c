@@ -60,13 +60,17 @@ static void vKeyboardTask(void *pvParameters)
 	uint8_t key_code;
     while(1)
     {
-    	if((GPIO_ReadInputDataBit(KEYB_PORT,KEY_0)==Bit_RESET)&&(key_flags[0]==KEY_RELEASED))
+    	if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_0)==Bit_RESET)
     	{
-    		vTaskDelay(10);
-    		if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_0)==Bit_RESET)
+    		if(key_flags[0]==KEY_RELEASED)
     		{
-    			key_code=KBD_CYCLE;
-    			xQueueSend( xKeyQueue,&key_code, portMAX_DELAY );
+				vTaskDelay(100);
+				if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_0)==Bit_RESET)
+				{
+					key_code=KBD_CYCLE;
+					key_flags[0]=KEY_PRESSED;
+					xQueueSend( xKeyQueue,&key_code, portMAX_DELAY );
+				}
     		}
     	}
     	else
@@ -74,13 +78,17 @@ static void vKeyboardTask(void *pvParameters)
     		key_flags[0]=KEY_RELEASED;
 		}
 
-    	if((GPIO_ReadInputDataBit(KEYB_PORT,KEY_1)==Bit_RESET)&&(key_flags[1]==KEY_RELEASED))
+    	if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_1)==Bit_RESET)
     	{
-    		vTaskDelay(10);
-    		if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_1)==Bit_RESET)
+    		if(key_flags[1]==KEY_RELEASED)
     		{
-    			key_code=KBD_UP;
-    			xQueueSend( xKeyQueue,&key_code, portMAX_DELAY );
+				vTaskDelay(100);
+				if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_1)==Bit_RESET)
+				{
+					key_code=KBD_UP;
+					key_flags[1]=KEY_PRESSED;
+					xQueueSend( xKeyQueue,&key_code, portMAX_DELAY );
+				}
     		}
     	}
     	else
@@ -89,13 +97,17 @@ static void vKeyboardTask(void *pvParameters)
 		}
 
 
-    	if((GPIO_ReadInputDataBit(KEYB_PORT,KEY_2)==Bit_RESET)&&(key_flags[2]==KEY_RELEASED))
+    	if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_2)==Bit_RESET)
     	{
-    		vTaskDelay(10);
-    		if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_2)==Bit_RESET)
+    		if(key_flags[2]==KEY_RELEASED)
     		{
-    			key_code=KBD_DOWN;
-    			xQueueSend( xKeyQueue,&key_code, portMAX_DELAY );
+				vTaskDelay(100);
+				if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_2)==Bit_RESET)
+				{
+					key_code=KBD_DOWN;
+					key_flags[2]=KEY_PRESSED;
+					xQueueSend( xKeyQueue,&key_code, portMAX_DELAY );
+				}
     		}
     	}
     	else
@@ -104,7 +116,7 @@ static void vKeyboardTask(void *pvParameters)
 		}
 
 
-    	vTaskDelay(50);
+    	vTaskDelay(500);
     	task_watches[KEYBOARD_TASK].counter++;
     }
 }

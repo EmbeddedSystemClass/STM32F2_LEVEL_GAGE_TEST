@@ -17,7 +17,8 @@ extern xSemaphoreHandle xADC_Mutex;
 
 typedef struct
 {
-	uint16_t velocity[2];
+	uint16_t speed_manual_control;
+	uint16_t speed_cycle;
 	uint16_t level_sensor;
 } st_adc_channels;
 
