@@ -13,6 +13,8 @@
 #include "adc.h"
 #include "pwm.h"
 
+#define CYCLE_LED_ON	GPIO_WriteBit(GPIOC, GPIO_Pin_6,1);
+#define CYCLE_LED_OFF	GPIO_WriteBit(GPIOC, GPIO_Pin_6,0);
 
 extern struct task_watch task_watches[];
 
@@ -23,6 +25,21 @@ st_level_gage_test level_gage_test;
 
 void Level_Gage_Test_Init(void)
 {
+    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
+
+    GPIO_InitTypeDef GPIO_InitStructure;
+
+    /* Configure port -------------------------------*/
+    GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_6;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_OUT;
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+    GPIO_Init(GPIOC, &GPIO_InitStructure);
+
+
+    CYCLE_LED_OFF;
+
 	level_gage_test.test_state=TEST_STATE_STOP;
 	level_gage_test.cycle_state=CYCLE_STATE_END;
 	xTaskCreate(Level_Gage_Test_Task,(signed char*)"LEVEL GAGE TEST TASK",128,NULL, tskIDLE_PRIORITY + 1, NULL);
@@ -61,14 +78,6 @@ void Level_Gage_Test_Task(void *pvParameters )
 
 					   case STEP_MOTOR_STOP:
 					   {
-						  if(level_gage_test.cycle_state==CYCLE_STATE_END)
-						  {
-							  level_gage_test.cycle_state=CYCLE_STATE_SEARCH_END_SWITCH_LOWER;
-							  Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
-						  }
-
-						  //-----------
-
 							  switch(level_gage_test.cycle_state)
 							 {
 								case CYCLE_STATE_SEARCH_END_SWITCH_LOWER:
@@ -91,7 +100,9 @@ void Level_Gage_Test_Task(void *pvParameters )
 
 								case CYCLE_STATE_END:
 								{
-									Step_Motor_Set_State(STEP_MOTOR_STOP);
+									  level_gage_test.cycle_state=CYCLE_STATE_SEARCH_END_SWITCH_LOWER;
+									  Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
+									  CYCLE_LED_ON;
 								}
 								break;
 
@@ -100,7 +111,6 @@ void Level_Gage_Test_Task(void *pvParameters )
 
 								}
 							}
-						  //--------------
 
 						  Step_Motor_Set_Move_Type(MOVE_TYPE_CYCLE);
 					   }
@@ -132,6 +142,7 @@ void Level_Gage_Test_Task(void *pvParameters )
 						   Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
 						   Step_Motor_Set_Move_Type(MOVE_TYPE_MANUAL);
 						   level_gage_test.cycle_state=CYCLE_STATE_END;
+						   CYCLE_LED_OFF;
 					   }
 					   break;
 				   }
@@ -161,6 +172,7 @@ void Level_Gage_Test_Task(void *pvParameters )
 						   Step_Motor_Set_State(STEP_MOTOR_ROTATE_LEFT);
 						   Step_Motor_Set_Move_Type(MOVE_TYPE_MANUAL);
 						   level_gage_test.cycle_state=CYCLE_STATE_END;
+						   CYCLE_LED_OFF;
 					   }
 					   break;
 				   }
@@ -226,6 +238,7 @@ void Level_Gage_Test_Task(void *pvParameters )
 							Step_Motor_Set_State(STEP_MOTOR_STOP);
 							level_gage_test.cycle_state=CYCLE_STATE_END;
 							level_gage_test.test_state=TEST_STATE_STOP;
+							CYCLE_LED_OFF;
 						}
 					}
 					break;
