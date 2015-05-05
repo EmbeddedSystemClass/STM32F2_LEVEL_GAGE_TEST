@@ -70,6 +70,7 @@ static void vKeyboardTask(void *pvParameters)
 					key_code=KBD_CYCLE;
 					key_flags[0]=KEY_PRESSED;
 					xQueueSend( xKeyQueue,&key_code, portMAX_DELAY );
+					Buzzer_Set_Buzz(BUZZER_EFFECT_0);
 				}
     		}
     	}
@@ -88,6 +89,7 @@ static void vKeyboardTask(void *pvParameters)
 					key_code=KBD_UP;
 					key_flags[1]=KEY_PRESSED;
 					xQueueSend( xKeyQueue,&key_code, portMAX_DELAY );
+					Buzzer_Set_Buzz(BUZZER_EFFECT_0);
 				}
     		}
     	}
@@ -107,6 +109,7 @@ static void vKeyboardTask(void *pvParameters)
 					key_code=KBD_DOWN;
 					key_flags[2]=KEY_PRESSED;
 					xQueueSend( xKeyQueue,&key_code, portMAX_DELAY );
+					Buzzer_Set_Buzz(BUZZER_EFFECT_0);
 				}
     		}
     	}

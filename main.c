@@ -47,11 +47,8 @@ int main(void)
 
 	Buzzer_Init();
 	Keyboard_Init();
-//	USBD_Init(&USB_OTG_dev,USB_OTG_FS_CORE_ID,&USR_desc,&USBD_CDC_cb,&USR_cb);
-//
-//
-//	Protocol_Init();
-//
+	USBD_Init(&USB_OTG_dev,USB_OTG_FS_CORE_ID,&USR_desc,&USBD_CDC_cb,&USR_cb);
+	Protocol_Init();
 //	Watchdog_Init();
 
 	Level_Gage_Test_Init();

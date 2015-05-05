@@ -10,6 +10,7 @@
 #include "semphr.h"
 #include "level_gage_test.h"
 #include "adc.h"
+#include "buzzer.h"
 
 #define PHAZE_0   TIM3->CCR1
 #define PHAZE_1   TIM3->CCR2
@@ -143,13 +144,21 @@ void Step_Motor_Task(void *pvParameters )
 //------------------------------------------------
 		if(GPIO_ReadInputDataBit(END_SWITCH_PORT,END_SWITCH_LOWER_PIN)==Bit_RESET)
 		{
-			step_motor.end_switch_state=END_SWITCH_LOWER;
+			if(step_motor.end_switch_state!=END_SWITCH_LOWER)
+			{
+				step_motor.end_switch_state=END_SWITCH_LOWER;
+				Buzzer_Set_Buzz(BUZZER_EFFECT_1);
+			}
 		}
 		else
 		{
 			if(GPIO_ReadInputDataBit(END_SWITCH_PORT,END_SWITCH_UPPER_PIN)==Bit_RESET)
 			{
-				step_motor.end_switch_state=END_SWITCH_UPPER;
+				if(step_motor.end_switch_state!=END_SWITCH_UPPER)
+				{
+					step_motor.end_switch_state=END_SWITCH_UPPER;
+					Buzzer_Set_Buzz(BUZZER_EFFECT_1);
+				}
 			}
 			else
 			{

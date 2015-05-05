@@ -33,7 +33,7 @@ static void Modbus_Task(void *pvParameters)
     for( ;; )
     {
         eMBPoll();
-        vTaskDelay(10);
+        vTaskDelay(100);
         task_watches[PROTO_TASK].counter++;
     }
 }

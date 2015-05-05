@@ -38,7 +38,7 @@ void Buzzer_Init(void)
 
     GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
 
-//    xTaskCreate(Buzzer_Task,(signed char*)"BUZZER",64,NULL, tskIDLE_PRIORITY + 1, &xBuzzer_Handle);
+   xTaskCreate(Buzzer_Task,(signed char*)"BUZZER",64,NULL, tskIDLE_PRIORITY + 1, &xBuzzer_Handle);
 }
 
 void Buzzer_Task(void *pvParameters )
@@ -49,21 +49,21 @@ void Buzzer_Task(void *pvParameters )
 		{
 			case BUZZER_EFFECT_0:
 			{
-				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
-				vTaskDelay(500);
 				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,1);
+				vTaskDelay(1500);
+				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
 			}
 			break;
 
 			case BUZZER_EFFECT_1:
 			{
-				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
-				vTaskDelay(300);
 				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,1);
-				vTaskDelay(300);
+				vTaskDelay(1000);
 				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
-				vTaskDelay(300);
+				vTaskDelay(1000);
 				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,1);
+				vTaskDelay(1000);
+				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
 			}
 			break;
 		}
