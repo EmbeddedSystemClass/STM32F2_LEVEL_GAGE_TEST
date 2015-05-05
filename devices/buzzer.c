@@ -66,6 +66,22 @@ void Buzzer_Task(void *pvParameters )
 				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
 			}
 			break;
+
+			case BUZZER_EFFECT_2:
+			{
+				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,1);
+				vTaskDelay(1000);
+				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
+				vTaskDelay(1000);
+				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,1);
+				vTaskDelay(1000);
+				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
+				vTaskDelay(1000);
+				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,1);
+				vTaskDelay(1000);
+				GPIO_WriteBit(BUZZER_PORT, BUZZER_PIN,0);
+			}
+			break;
 		}
 
 		task_watches[BUZZER_TASK].counter++;
