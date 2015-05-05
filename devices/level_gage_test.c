@@ -60,7 +60,6 @@ void Level_Gage_Test_Task(void *pvParameters )
 
 					   case STEP_MOTOR_STOP:
 					   {
-						   //Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
 						   level_gage_test.cycle_state=CYCLE_STATE_SEARCH_END_SWITCH_LOWER;
 						   Step_Motor_Set_Move_Type(MOVE_TYPE_CYCLE);
 					   }
@@ -182,7 +181,7 @@ void Level_Gage_Test_Task(void *pvParameters )
 					{
 						if(step_motor.end_switch_state!=END_SWITCH_LOWER)
 						{
-							Step_Motor_Set_State(STEP_MOTOR_ROTATE_LEFT);
+							Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
 						}
 						else
 						{
@@ -195,7 +194,7 @@ void Level_Gage_Test_Task(void *pvParameters )
 					{
 						if(step_motor.end_switch_state!=END_SWITCH_UPPER)
 						{
-							Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
+							Step_Motor_Set_State(STEP_MOTOR_ROTATE_LEFT);
 						}
 						else
 						{
@@ -208,7 +207,7 @@ void Level_Gage_Test_Task(void *pvParameters )
 					{
 						if(step_motor.end_switch_state!=END_SWITCH_LOWER)
 						{
-							Step_Motor_Set_State(STEP_MOTOR_ROTATE_LEFT);
+							Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
 						}
 						else
 						{
