@@ -18,6 +18,8 @@
 
 extern struct task_watch task_watches[];
 
+
+
 void Level_Gage_Test_Task(void *pvParameters );
 
 st_level_gage_test level_gage_test;
@@ -228,6 +230,12 @@ void Level_Gage_Test_Task(void *pvParameters )
 							  if(((int16_t)adc_channels.level_sensor_previous-(int16_t)adc_channels.level_sensor)>ADC_DELTA_ERROR)
 							  {
 								  Buzzer_Set_Buzz(BUZZER_EFFECT_2);
+
+								  if(level_gage_test.hercon_error.error_position_counter<ERROR_POSITION_NUM)
+								  {
+									  level_gage_test.hercon_error.error_position[level_gage_test.hercon_error.error_position_counter]=adc_channels.level_sensor_previous;
+									  level_gage_test.hercon_error.error_position_counter++;
+								  }
 							  }
 						 }
 						 xSemaphoreGive( xADC_Mutex );

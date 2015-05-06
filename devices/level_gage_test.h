@@ -22,11 +22,19 @@ typedef enum
 
 } en_cycle_state;
 
+#define ERROR_POSITION_NUM	16
+
+typedef struct
+{
+  uint16_t error_position[ERROR_POSITION_NUM];
+  uint16_t error_position_counter;
+} st_hercon_error;
+
 typedef struct
 {
 	en_test_state test_state;
 	en_cycle_state cycle_state;
-
+	st_hercon_error hercon_error;
 
 } st_level_gage_test;
 

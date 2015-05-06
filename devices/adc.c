@@ -77,7 +77,8 @@ void ADC_Channel_Init(void)
 	   xTaskCreate(ADC_Task,(signed char*)"ADC",128,NULL, tskIDLE_PRIORITY + 1, NULL);
 }
 
-#define NUM_CONV	32
+#define NUM_CONV_SENSOR		32
+#define NUM_CONV_RES		2
 #define MAX_ADC_CODE 	4095
 #define MAX_ADC_VOLTAGE	3.3
 
@@ -91,7 +92,7 @@ static void ADC_Task(void *pvParameters)
 		while(1)
 		{
 			  sum_adc_level_sensor=0;
-			  for(i=0;i<NUM_CONV;i++)
+			  for(i=0;i<NUM_CONV_SENSOR;i++)
 			  {
 				   ADC_RegularChannelConfig(ADC1, ADC_CHN_SENSOR, 1, ADC_SampleTime_480Cycles);
 				   ADC1->CR2 |= (uint32_t)ADC_CR2_SWSTART;
@@ -103,7 +104,7 @@ static void ADC_Task(void *pvParameters)
 			  }
 
 			  sum_adc_speed_cycle=0;
-			  for(i=0;i<NUM_CONV;i++)
+			  for(i=0;i<NUM_CONV_RES;i++)
 			  {
 				   ADC_RegularChannelConfig(ADC1, ADC_CHN_VELOCITY_1, 1, ADC_SampleTime_480Cycles);
 				   ADC1->CR2 |= (uint32_t)ADC_CR2_SWSTART;
@@ -115,7 +116,7 @@ static void ADC_Task(void *pvParameters)
 			  }
 
 			  sum_adc_speed_manual_control=0;
-			  for(i=0;i<NUM_CONV;i++)
+			  for(i=0;i<NUM_CONV_RES;i++)
 			  {
 				   ADC_RegularChannelConfig(ADC1, ADC_CHN_VELOCITY_2, 1, ADC_SampleTime_480Cycles);
 				   ADC1->CR2 |= (uint32_t)ADC_CR2_SWSTART;
@@ -129,9 +130,9 @@ static void ADC_Task(void *pvParameters)
 			 xSemaphoreTake( xADC_Mutex, portMAX_DELAY );
 			 {
 				  adc_channels.level_sensor_previous=adc_channels.level_sensor;
-				  adc_channels.level_sensor=(uint16_t)(sum_adc_level_sensor/NUM_CONV);
-				  adc_channels.speed_cycle=0xF00-((uint16_t)(sum_adc_speed_cycle/NUM_CONV) & 0xF00);
-				  adc_channels.speed_manual_control=(uint16_t)(sum_adc_speed_manual_control/NUM_CONV) & 0xF00;
+				  adc_channels.level_sensor=(uint16_t)(sum_adc_level_sensor/NUM_CONV_SENSOR);
+				  adc_channels.speed_cycle=0xF00-((uint16_t)(sum_adc_speed_cycle/NUM_CONV_RES) & 0xF00);
+				  adc_channels.speed_manual_control=(uint16_t)(sum_adc_speed_manual_control/NUM_CONV_RES) & 0xF00;
 			 }
 			 xSemaphoreGive( xADC_Mutex );
 
