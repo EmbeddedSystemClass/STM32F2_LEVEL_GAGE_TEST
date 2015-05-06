@@ -223,6 +223,15 @@ void Level_Gage_Test_Task(void *pvParameters )
 
 					case CYCLE_STATE_GET_UP:
 					{
+						 xSemaphoreTake( xADC_Mutex, portMAX_DELAY );
+						 {
+							  if(((int16_t)adc_channels.level_sensor_previous-(int16_t)adc_channels.level_sensor)>ADC_DELTA_ERROR)
+							  {
+								  Buzzer_Set_Buzz(BUZZER_EFFECT_2);
+							  }
+						 }
+						 xSemaphoreGive( xADC_Mutex );
+
 						if(step_motor.end_switch_state==END_SWITCH_UPPER)
 						{
 							level_gage_test.cycle_state=CYCLE_STATE_GET_DOWN;
@@ -233,6 +242,15 @@ void Level_Gage_Test_Task(void *pvParameters )
 
 					case CYCLE_STATE_GET_DOWN:
 					{
+						 xSemaphoreTake( xADC_Mutex, portMAX_DELAY );
+						 {
+							  if(((int16_t)adc_channels.level_sensor-(int16_t)adc_channels.level_sensor_previous)>ADC_DELTA_ERROR)
+							  {
+								  Buzzer_Set_Buzz(BUZZER_EFFECT_2);
+							  }
+						 }
+
+						 xSemaphoreGive( xADC_Mutex );
 						if(step_motor.end_switch_state==END_SWITCH_LOWER)
 						{
 							Step_Motor_Set_State(STEP_MOTOR_STOP);

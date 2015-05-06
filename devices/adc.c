@@ -59,7 +59,7 @@ void ADC_Channel_Init(void)
 		ADC_CommonInitStructure.ADC_Mode = ADC_Mode_Independent;
 		ADC_CommonInitStructure.ADC_Prescaler = ADC_Prescaler_Div8;
 		ADC_CommonInitStructure.ADC_DMAAccessMode = ADC_DMAAccessMode_Disabled;
-		ADC_CommonInitStructure.ADC_TwoSamplingDelay = ADC_TwoSamplingDelay_5Cycles;
+		ADC_CommonInitStructure.ADC_TwoSamplingDelay = ADC_TwoSamplingDelay_20Cycles;
 		ADC_CommonInit(&ADC_CommonInitStructure);
 
 
@@ -77,7 +77,7 @@ void ADC_Channel_Init(void)
 	   xTaskCreate(ADC_Task,(signed char*)"ADC",128,NULL, tskIDLE_PRIORITY + 1, NULL);
 }
 
-#define NUM_CONV	16
+#define NUM_CONV	32
 #define MAX_ADC_CODE 	4095
 #define MAX_ADC_VOLTAGE	3.3
 
@@ -128,9 +128,10 @@ static void ADC_Task(void *pvParameters)
 
 			 xSemaphoreTake( xADC_Mutex, portMAX_DELAY );
 			 {
+				  adc_channels.level_sensor_previous=adc_channels.level_sensor;
 				  adc_channels.level_sensor=(uint16_t)(sum_adc_level_sensor/NUM_CONV);
-				  adc_channels.speed_cycle=(uint16_t)(sum_adc_speed_cycle/NUM_CONV);
-				  adc_channels.speed_manual_control=(uint16_t)(sum_adc_speed_manual_control/NUM_CONV);
+				  adc_channels.speed_cycle=0xF00-((uint16_t)(sum_adc_speed_cycle/NUM_CONV) & 0xF00);
+				  adc_channels.speed_manual_control=(uint16_t)(sum_adc_speed_manual_control/NUM_CONV) & 0xF00;
 			 }
 			 xSemaphoreGive( xADC_Mutex );
 

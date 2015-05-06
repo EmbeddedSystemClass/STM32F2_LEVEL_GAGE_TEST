@@ -1,6 +1,7 @@
 #include "ModBus/include/mb.h" 
 #include "level_gage_test.h"
 #include "backup_sram.h"
+#include "adc.h"
 
 extern struct uks uks_channels;
 
@@ -40,6 +41,14 @@ eMBRegInputCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs )
 //    ((float*)usRegInputBuf)[DRYING_CHANNELS_NUM+1] = uks_channels.heater_temperature_current_setting;
 //
 //    usRegInputBuf[(DRYING_CHANNELS_NUM+2)*2] = uks_channels.power_value;
+
+	 xSemaphoreTake( xADC_Mutex, portMAX_DELAY );
+	 {
+		 usRegInputBuf[0]=adc_channels.level_sensor;
+		 usRegInputBuf[1]=adc_channels.speed_cycle;
+		 usRegInputBuf[2]=adc_channels.speed_manual_control;
+	 }
+	 xSemaphoreGive( xADC_Mutex );
 
 
     if( ( usAddress >= REG_INPUT_START )&& ( usAddress + usNRegs <= REG_INPUT_START + REG_INPUT_NREGS ) )

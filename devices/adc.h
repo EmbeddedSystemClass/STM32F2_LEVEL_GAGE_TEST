@@ -12,6 +12,10 @@
 #define ADC_LM35_CHANNELS_NUM 	DRYING_CHANNELS_NUM
 #define ADC_FILTER_BUFFER_LEN	16
 
+#define ERROR_POSITION_NUM	16
+
+#define ADC_DELTA_ERROR			0x7FF
+
 extern xSemaphoreHandle xADC_Mutex;
 
 
@@ -20,6 +24,8 @@ typedef struct
 	uint16_t speed_manual_control;
 	uint16_t speed_cycle;
 	uint16_t level_sensor;
+	uint16_t level_sensor_previous;
+	uint16_t error_position[ERROR_POSITION_NUM];
 } st_adc_channels;
 
 extern st_adc_channels adc_channels;
