@@ -32,16 +32,6 @@ eMBRegInputCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs )
     uint16_t i=0;
 
 
-//    for(i=0;i<DRYING_CHANNELS_NUM;i++)
-//    {
-//    	((float*)usRegInputBuf)[i] = uks_channels.drying_channel_list[i].temperature;
-//    }
-//
-//    ((float*)usRegInputBuf)[DRYING_CHANNELS_NUM] = uks_channels.heater_temperature;
-//    ((float*)usRegInputBuf)[DRYING_CHANNELS_NUM+1] = uks_channels.heater_temperature_current_setting;
-//
-//    usRegInputBuf[(DRYING_CHANNELS_NUM+2)*2] = uks_channels.power_value;
-
 	 xSemaphoreTake( xADC_Mutex, portMAX_DELAY );
 	 {
 		 usRegInputBuf[0]=adc_channels.level_sensor;

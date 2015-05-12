@@ -9,7 +9,7 @@
 
 extern uint8_t end_switch_state;
 
-#define STEP_MOTOR_ROTATE_PWM	0x7F
+#define STEP_MOTOR_ROTATE_PWM	0x9F
 #define STEP_MOTOR_ROTATE_PWM_DELAY	10
 
 #define STEP_MOTOR_HOLDING_PWM	0x5F

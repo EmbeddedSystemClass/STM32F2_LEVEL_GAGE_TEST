@@ -217,6 +217,7 @@ void Level_Gage_Test_Task(void *pvParameters )
 					{
 						if(step_motor.end_switch_state==END_SWITCH_LOWER)
 						{
+							vTaskDelay(1000);
 							level_gage_test.cycle_state=CYCLE_STATE_GET_UP;
 							Step_Motor_Set_State(STEP_MOTOR_ROTATE_LEFT);
 						}
@@ -242,6 +243,7 @@ void Level_Gage_Test_Task(void *pvParameters )
 
 						if(step_motor.end_switch_state==END_SWITCH_UPPER)
 						{
+							vTaskDelay(1000);
 							level_gage_test.cycle_state=CYCLE_STATE_GET_DOWN;
 							Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
 						}
@@ -257,7 +259,6 @@ void Level_Gage_Test_Task(void *pvParameters )
 								  Buzzer_Set_Buzz(BUZZER_EFFECT_2);
 							  }
 						 }
-
 						 xSemaphoreGive( xADC_Mutex );
 						if(step_motor.end_switch_state==END_SWITCH_LOWER)
 						{

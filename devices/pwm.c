@@ -105,9 +105,8 @@ void Step_Motor_Task(void *pvParameters )
 {
 	while(1)
 	{
-		 xSemaphoreTake( xADC_Mutex, portMAX_DELAY );
+//		 xSemaphoreTake( xADC_Mutex, portMAX_DELAY );
 		 {
-
 			 if(step_motor.step_motor_move_type==MOVE_TYPE_MANUAL)
 			 {
 				 step_motor.step_period=adc_channels.speed_manual_control;
@@ -117,7 +116,7 @@ void Step_Motor_Task(void *pvParameters )
 				 step_motor.step_period=adc_channels.speed_cycle;
 			 }
 		 }
-		 xSemaphoreGive( xADC_Mutex );
+//		 xSemaphoreGive( xADC_Mutex );
 
 		 step_motor.step_period/=10;
 
@@ -147,6 +146,7 @@ void Step_Motor_Task(void *pvParameters )
 			if(step_motor.end_switch_state!=END_SWITCH_LOWER)
 			{
 				step_motor.end_switch_state=END_SWITCH_LOWER;
+				Step_Motor_Set_State(STEP_MOTOR_STOP);
 				Buzzer_Set_Buzz(BUZZER_EFFECT_1);
 			}
 		}
@@ -157,6 +157,7 @@ void Step_Motor_Task(void *pvParameters )
 				if(step_motor.end_switch_state!=END_SWITCH_UPPER)
 				{
 					step_motor.end_switch_state=END_SWITCH_UPPER;
+					Step_Motor_Set_State(STEP_MOTOR_STOP);
 					Buzzer_Set_Buzz(BUZZER_EFFECT_1);
 				}
 			}
@@ -213,6 +214,7 @@ void Step_Motor_Task(void *pvParameters )
 void Step_Motor_Set_State(uint8_t state)
 {
 	step_motor.step_motor_state=state;
+	step_motor.step_starting_counter=STEP_MOTOR_STARTING_PERIOD;
 }
 
 uint8_t Step_Motor_Get_State(void)
