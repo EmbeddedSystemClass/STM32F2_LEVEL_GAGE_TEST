@@ -3,7 +3,6 @@
 #include "backup_sram.h"
 #include "adc.h"
 
-extern struct uks uks_channels;
 
 void ENTER_CRITICAL_SECTION(void)
 {
@@ -16,11 +15,11 @@ void EXIT_CRITICAL_SECTION(void)
 }
 
 
-static volatile u16 usRegInputBuf[32];
+static volatile u16 usRegInputBuf[8];
 u16 *usRegHoldingBuf=usRegInputBuf;
 
 u8 REG_INPUT_START=1,REG_HOLDING_START=1;
-u8 REG_INPUT_NREGS=4,REG_HOLDING_NREGS=0;
+u8 REG_INPUT_NREGS=5,REG_HOLDING_NREGS=0;
 u8 usRegInputStart=1,usRegHoldingStart=1;
 
 
@@ -37,6 +36,8 @@ eMBRegInputCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs )
 		 usRegInputBuf[0]=adc_channels.level_sensor;
 		 usRegInputBuf[1]=adc_channels.speed_cycle;
 		 usRegInputBuf[2]=adc_channels.speed_manual_control;
+		 usRegInputBuf[3]=level_gage_test.test_state;
+		 usRegInputBuf[4]=level_gage_test.cycle_state;
 	 }
 	 xSemaphoreGive( xADC_Mutex );
 

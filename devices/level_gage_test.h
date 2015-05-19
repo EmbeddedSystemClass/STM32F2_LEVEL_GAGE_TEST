@@ -11,6 +11,7 @@ typedef enum
 	TEST_STATE_GET_UP,
 	TEST_STATE_GET_DOWN,
 	TEST_STATE_CYCLE,
+	TEST_STATE_CYCLE_PAUSE,
 } en_test_state;
 
 typedef enum
@@ -37,6 +38,8 @@ typedef struct
 	st_hercon_error hercon_error;
 
 } st_level_gage_test;
+
+extern st_level_gage_test level_gage_test;
 
 void Level_Gage_Test_Init(void);
 void Level_Gage_Test_Restore_Settings(void);

@@ -62,59 +62,158 @@ void Level_Gage_Test_Task(void *pvParameters )
 		   {
 			   case KBD_CYCLE:
 			   {
-				   level_gage_test.test_state=TEST_STATE_CYCLE;
-
 				   switch(step_motor.step_motor_state)
 				   {
 					   case STEP_MOTOR_ROTATE_LEFT:
 					   {
 						   Step_Motor_Set_State(STEP_MOTOR_STOP);
+
+						   if(level_gage_test.test_state==TEST_STATE_CYCLE)
+						   {
+							  level_gage_test.test_state=TEST_STATE_CYCLE_PAUSE;
+						   }
+						   else
+						   {
+							   level_gage_test.cycle_state=CYCLE_STATE_END;
+							   level_gage_test.test_state=TEST_STATE_STOP;
+						   }
 					   }
 					   break;
 
 					   case STEP_MOTOR_ROTATE_RIGHT:
 					   {
 						   Step_Motor_Set_State(STEP_MOTOR_STOP);
+
+						   if(level_gage_test.test_state==TEST_STATE_CYCLE)
+						   {
+							  level_gage_test.test_state=TEST_STATE_CYCLE_PAUSE;
+						   }
+						   else
+						   {
+							   level_gage_test.cycle_state=CYCLE_STATE_END;
+							   level_gage_test.test_state=TEST_STATE_STOP;
+						   }
 					   }
 					   break;
 
 					   case STEP_MOTOR_STOP:
 					   {
-							  switch(level_gage_test.cycle_state)
-							 {
-								case CYCLE_STATE_SEARCH_END_SWITCH_LOWER:
+//							if(level_gage_test.test_state==TEST_STATE_CYCLE)
+//							{
+//								 switch(level_gage_test.cycle_state)
+//								 {
+//										case CYCLE_STATE_SEARCH_END_SWITCH_LOWER:
+//										{
+//											Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
+//										}
+//										break;
+//
+//										case CYCLE_STATE_GET_UP:
+//										{
+//											Step_Motor_Set_State(STEP_MOTOR_ROTATE_LEFT);
+//										}
+//										break;
+//
+//										case CYCLE_STATE_GET_DOWN:
+//										{
+//											Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
+//										}
+//										break;
+//
+//										case CYCLE_STATE_END:
+//										{
+//											  level_gage_test.cycle_state=CYCLE_STATE_SEARCH_END_SWITCH_LOWER;
+//											  Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
+//											  CYCLE_LED_ON;
+//										}
+//										break;
+//
+//										default:
+//										{
+//
+//										}
+//								  }
+//								 Step_Motor_Set_Move_Type(MOVE_TYPE_CYCLE);
+//							}
+//							else if(level_gage_test.test_state==TEST_STATE_STOP)
+//							{
+//								level_gage_test.test_state=TEST_STATE_CYCLE;
+//								level_gage_test.cycle_state=CYCLE_STATE_SEARCH_END_SWITCH_LOWER;
+//								Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
+//							}
+//							else
+//							{
+//								level_gage_test.test_state=TEST_STATE_STOP;
+//								Step_Motor_Set_State(STEP_MOTOR_STOP);
+//								level_gage_test.cycle_state=CYCLE_STATE_END;
+//							}
+
+
+							switch(level_gage_test.test_state)
+							{
+								case TEST_STATE_STOP:
 								{
-									Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
+
 								}
 								break;
 
-								case CYCLE_STATE_GET_UP:
+								case TEST_STATE_GET_DOWN:
 								{
-									Step_Motor_Set_State(STEP_MOTOR_ROTATE_LEFT);
+
 								}
 								break;
 
-								case CYCLE_STATE_GET_DOWN:
+								case TEST_STATE_GET_UP:
 								{
-									Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
+
 								}
 								break;
 
-								case CYCLE_STATE_END:
+								case TEST_STATE_CYCLE_PAUSE:
 								{
-									  level_gage_test.cycle_state=CYCLE_STATE_SEARCH_END_SWITCH_LOWER;
-									  Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
-									  CYCLE_LED_ON;
+
 								}
 								break;
 
-								default:
+								case TEST_STATE_CYCLE:
 								{
+									 switch(level_gage_test.cycle_state)
+									 {
+											case CYCLE_STATE_SEARCH_END_SWITCH_LOWER:
+											{
+												Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
+											}
+											break;
 
+											case CYCLE_STATE_GET_UP:
+											{
+												Step_Motor_Set_State(STEP_MOTOR_ROTATE_LEFT);
+											}
+											break;
+
+											case CYCLE_STATE_GET_DOWN:
+											{
+												Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
+											}
+											break;
+
+											case CYCLE_STATE_END:
+											{
+												level_gage_test.cycle_state=CYCLE_STATE_SEARCH_END_SWITCH_LOWER;
+												Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
+												CYCLE_LED_ON;
+											}
+											break;
+
+											default:
+											{
+
+											}
+									  }
+									  Step_Motor_Set_Move_Type(MOVE_TYPE_CYCLE);
 								}
+								break;
 							}
-
-						  Step_Motor_Set_Move_Type(MOVE_TYPE_CYCLE);
 					   }
 					   break;
 				   }
@@ -130,12 +229,14 @@ void Level_Gage_Test_Task(void *pvParameters )
 					   case STEP_MOTOR_ROTATE_LEFT:
 					   {
 						   Step_Motor_Set_State(STEP_MOTOR_STOP);
+						   level_gage_test.test_state=TEST_STATE_STOP;
 					   }
 					   break;
 
 					   case STEP_MOTOR_ROTATE_RIGHT:
 					   {
 						   Step_Motor_Set_State(STEP_MOTOR_STOP);
+						   level_gage_test.test_state=TEST_STATE_STOP;
 					   }
 					   break;
 
@@ -160,12 +261,14 @@ void Level_Gage_Test_Task(void *pvParameters )
 					   case STEP_MOTOR_ROTATE_LEFT:
 					   {
 						   Step_Motor_Set_State(STEP_MOTOR_STOP);
+						   level_gage_test.test_state=TEST_STATE_STOP;
 					   }
 					   break;
 
 					   case STEP_MOTOR_ROTATE_RIGHT:
 					   {
 						   Step_Motor_Set_State(STEP_MOTOR_STOP);
+						   level_gage_test.test_state=TEST_STATE_STOP;
 					   }
 					   break;
 
@@ -204,6 +307,12 @@ void Level_Gage_Test_Task(void *pvParameters )
 			break;
 
 			case TEST_STATE_GET_UP:
+			{
+
+			}
+			break;
+
+			case TEST_STATE_CYCLE_PAUSE:
 			{
 
 			}
