@@ -578,7 +578,7 @@
          <include file="..\..\..\devices\watchdog.h"/>
          <include file="..\..\..\devices\level_gage_test.h"/>
       </source>
-      <source file="..\..\..\devices\level_gage_test.h" lastModified="14d6ba0d54e">
+      <source file="..\..\..\devices\level_gage_test.h" lastModified="14d6c20058c">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
       </source>
       <source file="..\..\..\cmsis_lib\include\stm32f4xx_iwdg.h" lastModified="14cfa650b29">
@@ -594,18 +594,6 @@
       </source>
       <source file="..\..\..\usblib\usb_bsp.h" lastModified="13ced9dd750">
          <include file="..\..\..\usblib\usb_core.h"/>
-      </source>
-      <source file="..\..\..\devices\level_gage_test.c" lastModified="14d6c182a03">
-         <include file="..\..\..\devices\level_gage_test.h"/>
-         <include file="..\..\..\FreeRTOSV7.1.0\Source\include\FreeRTOS.h"/>
-         <include file="..\..\..\FreeRTOSV7.1.0\Source\include\task.h"/>
-         <include file="..\..\..\FreeRTOSV7.1.0\Source\include\queue.h"/>
-         <include file="..\..\..\FreeRTOSV7.1.0\Source\include\semphr.h"/>
-         <include file="..\..\..\devices\buzzer.h"/>
-         <include file="..\..\..\devices\watchdog.h"/>
-         <include file="..\..\..\devices\keyboard.h"/>
-         <include file="..\..\..\devices\adc.h"/>
-         <include file="..\..\..\devices\pwm.h"/>
       </source>
       <source file="..\..\..\modbus\port\porttimer.c" lastModified="14d23c2412c">
          <include file="..\..\..\modbus\port\mbport.h"/>
