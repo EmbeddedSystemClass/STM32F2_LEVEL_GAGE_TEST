@@ -29,6 +29,8 @@ void Step_Motor_Step_Left(void);
 void Step_Motor_Step_Right(void);
 void Step_Motor_Hold(void);
 
+xSemaphoreHandle xEndSwitchSemaphore;
+
 void Step_Motor_Init(void)
 {
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
@@ -98,6 +100,8 @@ void Step_Motor_Init(void)
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_Init(END_SWITCH_PORT, &GPIO_InitStructure);
 
+    vSemaphoreCreateBinary( xEndSwitchSemaphore );
+
     xTaskCreate(Step_Motor_Task,(signed char*)"STEP MOTOR TASK",64,NULL, tskIDLE_PRIORITY + 1, NULL);
 }
 
@@ -147,6 +151,7 @@ void Step_Motor_Task(void *pvParameters )
 			{
 				step_motor.end_switch_state=END_SWITCH_LOWER;
 				Step_Motor_Set_State(STEP_MOTOR_STOP);
+				xSemaphoreGive(xEndSwitchSemaphore);
 				Buzzer_Set_Buzz(BUZZER_EFFECT_1);
 			}
 		}
@@ -158,6 +163,7 @@ void Step_Motor_Task(void *pvParameters )
 				{
 					step_motor.end_switch_state=END_SWITCH_UPPER;
 					Step_Motor_Set_State(STEP_MOTOR_STOP);
+					xSemaphoreGive(xEndSwitchSemaphore);
 					Buzzer_Set_Buzz(BUZZER_EFFECT_1);
 				}
 			}

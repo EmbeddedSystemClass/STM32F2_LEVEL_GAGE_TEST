@@ -86,7 +86,7 @@ static void vKeyboardTask(void *pvParameters)
 				vTaskDelay(100);
 				if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_1)==Bit_RESET)
 				{
-					key_code=KBD_UP;
+					key_code=KBD_DOWN;
 					key_flags[1]=KEY_PRESSED;
 					xQueueSend( xKeyQueue,&key_code, portMAX_DELAY );
 					Buzzer_Set_Buzz(BUZZER_EFFECT_0);
@@ -106,7 +106,7 @@ static void vKeyboardTask(void *pvParameters)
 				vTaskDelay(100);
 				if(GPIO_ReadInputDataBit(KEYB_PORT,KEY_2)==Bit_RESET)
 				{
-					key_code=KBD_DOWN;
+					key_code=KBD_UP;
 					key_flags[2]=KEY_PRESSED;
 					xQueueSend( xKeyQueue,&key_code, portMAX_DELAY );
 					Buzzer_Set_Buzz(BUZZER_EFFECT_0);

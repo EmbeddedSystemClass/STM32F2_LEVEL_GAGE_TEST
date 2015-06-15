@@ -7,6 +7,8 @@
 #include "stm32f4xx_tim.h"
 #include <misc.h>
 
+//#include "semphr.h"
+
 extern uint8_t end_switch_state;
 
 #define STEP_MOTOR_ROTATE_PWM	0x9F
@@ -51,6 +53,7 @@ typedef struct
 }st_step_motor;
 
 extern st_step_motor step_motor;
+
 
 void Step_Motor_Init(void);
 void Step_Motor_Set_Step_Period(uint16_t period);
