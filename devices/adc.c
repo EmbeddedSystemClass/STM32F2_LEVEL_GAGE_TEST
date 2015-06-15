@@ -83,6 +83,20 @@ void ADC_Channel_Init(void)
 #define MAX_ADC_VOLTAGE	3.3
 
 
+uint16_t abs(int16_t num)
+{
+	if(num>=0)
+	{
+		return (uint16_t)num;
+	}
+	else
+	{
+		return (uint16_t)(-num);
+	}
+}
+
+#define CONTROL_DELTA	32
+
 static void ADC_Task(void *pvParameters)
 {
 		uint8_t i=0;
@@ -127,14 +141,29 @@ static void ADC_Task(void *pvParameters)
 				   sum_adc_speed_manual_control+=ADC1->DR;
 			  }
 
+			  if(abs((uint16_t)(sum_adc_speed_manual_control/NUM_CONV_RES)-adc_channels.speed_manual_control_previous)>CONTROL_DELTA)
+			  {
+				  adc_channels.speed_manual_control=(uint16_t)(sum_adc_speed_manual_control/NUM_CONV_RES) & 0xF00;
+				  adc_channels.speed_manual_control_previous=(uint16_t)(sum_adc_speed_manual_control/NUM_CONV_RES);
+			  }
+
+			  if(abs((0xFFF-((uint16_t)(sum_adc_speed_cycle/NUM_CONV_RES)))-adc_channels.speed_cycle_previous)>CONTROL_DELTA)
+			  {
+				  adc_channels.speed_cycle=0xF00-((uint16_t)(sum_adc_speed_cycle/NUM_CONV_RES) & 0xF00);
+				  adc_channels.speed_cycle_previous=(uint16_t)(sum_adc_speed_cycle/NUM_CONV_RES);
+			  }
+
 			 xSemaphoreTake( xADC_Mutex, portMAX_DELAY );
 			 {
 				  adc_channels.level_sensor_previous=adc_channels.level_sensor;
 				  adc_channels.level_sensor=(uint16_t)(sum_adc_level_sensor/NUM_CONV_SENSOR);
-				  adc_channels.speed_cycle=0xF00-((uint16_t)(sum_adc_speed_cycle/NUM_CONV_RES) & 0xF00);
-				  adc_channels.speed_manual_control=(uint16_t)(sum_adc_speed_manual_control/NUM_CONV_RES) & 0xF00;
+//				  adc_channels.speed_cycle=/*0xF00*/0xFFF-((uint16_t)(sum_adc_speed_cycle/NUM_CONV_RES) /*& 0xF00*/);
+//				  adc_channels.speed_manual_control=(uint16_t)(sum_adc_speed_manual_control/NUM_CONV_RES)/* & 0xF00*/;
 			 }
 			 xSemaphoreGive( xADC_Mutex );
+
+
+
 
 			 vTaskDelay(100);
 			 task_watches[ADC_TASK].counter++;

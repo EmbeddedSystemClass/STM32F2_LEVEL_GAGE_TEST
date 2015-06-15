@@ -424,7 +424,7 @@
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
       </source>
-      <source file="..\..\..\devices\adc.h" lastModified="14d2914870e">
+      <source file="..\..\..\devices\adc.h" lastModified="14df676ba19">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
          <include file="..\..\..\devices\level_gage_test.h"/>
          <include file="..\..\..\FreeRTOSV7.1.0\Source\include\FreeRTOS.h"/>
@@ -440,19 +440,6 @@
       <source file="..\..\..\cmsis_lib\source\stm32f4xx_syscfg.c" lastModified="14a0a930df3">
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_syscfg.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
-      </source>
-      <source file="..\..\..\devices\adc.c" lastModified="14d28e485ef">
-         <include file="..\..\..\devices\adc.h"/>
-         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
-         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
-         <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
-         <include file="..\..\..\cmsis_lib\include\stm32f4xx_adc.h"/>
-         <include file="..\..\..\FreeRTOSV7.1.0\Source\include\FreeRTOS.h"/>
-         <include file="..\..\..\FreeRTOSV7.1.0\Source\include\task.h"/>
-         <include file="..\..\..\FreeRTOSV7.1.0\Source\include\queue.h"/>
-         <include file="..\..\..\FreeRTOSV7.1.0\Source\include\semphr.h"/>
-         <include file="..\..\..\devices\level_gage_test.h"/>
-         <include file="..\..\..\devices\watchdog.h"/>
       </source>
       <source file="..\..\..\usblib\usbd_desc.h" lastModified="131607566a0">
          <include file="..\..\..\usblib\usbd_def.h"/>
@@ -594,6 +581,18 @@
       </source>
       <source file="..\..\..\usblib\usb_bsp.h" lastModified="13ced9dd750">
          <include file="..\..\..\usblib\usb_core.h"/>
+      </source>
+      <source file="..\..\..\devices\level_gage_test.c" lastModified="14df61a5266">
+         <include file="..\..\..\devices\level_gage_test.h"/>
+         <include file="..\..\..\FreeRTOSV7.1.0\Source\include\FreeRTOS.h"/>
+         <include file="..\..\..\FreeRTOSV7.1.0\Source\include\task.h"/>
+         <include file="..\..\..\FreeRTOSV7.1.0\Source\include\queue.h"/>
+         <include file="..\..\..\FreeRTOSV7.1.0\Source\include\semphr.h"/>
+         <include file="..\..\..\devices\buzzer.h"/>
+         <include file="..\..\..\devices\watchdog.h"/>
+         <include file="..\..\..\devices\keyboard.h"/>
+         <include file="..\..\..\devices\adc.h"/>
+         <include file="..\..\..\devices\pwm.h"/>
       </source>
       <source file="..\..\..\modbus\port\porttimer.c" lastModified="14d23c2412c">
          <include file="..\..\..\modbus\port\mbport.h"/>
