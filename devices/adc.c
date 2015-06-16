@@ -102,13 +102,13 @@ static void ADC_Task(void *pvParameters)
 		uint8_t i=0;
 		uint32_t  sum_adc_level_sensor, sum_adc_speed_manual_control, sum_adc_speed_cycle;
 		task_watches[ADC_TASK].task_status=TASK_ACTIVE;
-
+		//ADC_TempSensorVrefintCmd(ENABLE);
 		while(1)
 		{
 			  sum_adc_level_sensor=0;
 			  for(i=0;i<NUM_CONV_SENSOR;i++)
 			  {
-				   ADC_RegularChannelConfig(ADC1, ADC_CHN_SENSOR, 1, ADC_SampleTime_480Cycles);
+				   ADC_RegularChannelConfig(ADC1, ADC_CHN_SENSOR/*ADC_Channel_Vrefint*/, 1, ADC_SampleTime_480Cycles);
 				   ADC1->CR2 |= (uint32_t)ADC_CR2_SWSTART;
 				   while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET)
 				   {
@@ -152,6 +152,9 @@ static void ADC_Task(void *pvParameters)
 				  adc_channels.speed_cycle=0xF00-((uint16_t)(sum_adc_speed_cycle/NUM_CONV_RES) & 0xF00);
 				  adc_channels.speed_cycle_previous=(uint16_t)(sum_adc_speed_cycle/NUM_CONV_RES);
 			  }
+
+
+			 // adc_channels.speed_cycle=0xFFF-((uint16_t)(sum_adc_speed_cycle/NUM_CONV_RES)) ;
 
 			 xSemaphoreTake( xADC_Mutex, portMAX_DELAY );
 			 {
