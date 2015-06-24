@@ -69,6 +69,7 @@ void Level_Gage_Test_Task(void *pvParameters )
 							 level_gage_test.cycle_state=CYCLE_STATE_SEARCH_END_SWITCH_LOWER;
 							 level_gage_test.test_state=TEST_STATE_CYCLE;
 							 step_motor.end_switch_state=END_SWITCH_NONE;
+							 vTaskDelay(1000);
 							 Step_Motor_Set_Move_Type(MOVE_TYPE_CYCLE);
 							 Step_Motor_Set_State(STEP_MOTOR_ROTATE_RIGHT);
 							 CYCLE_LED_ON;

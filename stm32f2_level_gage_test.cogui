@@ -16,43 +16,33 @@
 <part id="3"/>
 <part id="4"/>
 <part id="5"/>
-<part id="6"/>
-<part id="7"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="pwm.c" partName="pwm.c" path="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/pwm.c" title="pwm.c" tooltip="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/pwm.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/stm32f2_level_gage_test/devices/pwm.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="20" selectionOffset="6014" selectionTopPixel="2109"/>
+<editorState selectionHorizontalPixel="0" selectionLength="45" selectionOffset="4628" selectionTopPixel="1464"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="level_gage_test.c" partName="level_gage_test.c" path="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/level_gage_test.c" title="level_gage_test.c" tooltip="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/level_gage_test.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/stm32f2_level_gage_test/devices/level_gage_test.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="6662" selectionTopPixel="4315"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1872" selectionTopPixel="798"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f4xx.c" partName="startup_stm32f4xx.c" path="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/cmsis_boot/startup/startup_stm32f4xx.c" title="startup_stm32f4xx.c" tooltip="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/cmsis_boot/startup/startup_stm32f4xx.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/stm32f2_level_gage_test/cmsis_boot/startup/startup_stm32f4xx.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="14795" selectionTopPixel="4318"/>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/main.c" title="main.c" tooltip="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/main.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/stm32f2_level_gage_test/main.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="960" selectionTopPixel="369"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="buzzer.c" partName="buzzer.c" path="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/buzzer.c" title="buzzer.c" tooltip="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/buzzer.c" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/stm32f2_level_gage_test/devices/buzzer.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="522" selectionOffset="454" selectionTopPixel="90"/>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="keyboard.c" partName="keyboard.c" path="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/keyboard.c" title="keyboard.c" tooltip="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/keyboard.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/stm32f2_level_gage_test/devices/keyboard.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1894" selectionTopPixel="1329"/>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="adc.c" partName="adc.c" path="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/adc.c" title="adc.c" tooltip="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/adc.c" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="adc.c" partName="adc.c" path="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/adc.c" title="adc.c" tooltip="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/adc.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/stm32f2_level_gage_test/devices/adc.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="16" selectionOffset="407" selectionTopPixel="170"/>
+<editorState selectionHorizontalPixel="68" selectionLength="1" selectionOffset="4144" selectionTopPixel="2135"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="adc.h" partName="adc.h" path="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/adc.h" title="adc.h" tooltip="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/adc.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/stm32f2_level_gage_test/devices/adc.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="261" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="level_gage_test.h" partName="level_gage_test.h" path="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/level_gage_test.h" title="level_gage_test.h" tooltip="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/level_gage_test.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/stm32f2_level_gage_test/devices/level_gage_test.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="12" selectionOffset="585" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="pwm.h" partName="pwm.h" path="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/pwm.h" title="pwm.h" tooltip="D:/PROJECTS/GIT_REPOSITORY/STM32/STM32F2_LEVEL_GAGE_TEST/devices/pwm.h" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/stm32f2_level_gage_test/devices/pwm.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1048" selectionTopPixel="391"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="489" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -71,7 +61,7 @@
 <element path="/stm32f2_level_gage_test/devices"/>
 </expanded>
 <selection>
-<element path="/stm32f2_level_gage_test/devices/level_gage_test.c"/>
+<element path="/stm32f2_level_gage_test/devices/adc.c"/>
 </selection>
 </viewState>
 </view>
@@ -196,8 +186,8 @@
 <hide_menu_item_id id="org.coocox.builder.rcp.flashMenu"/>
 <hide_menu_item_id id="org.coocox.builder.ui.debug"/>
 <hide_menu_item_id id="org.coocox.builder.ui.showHelpViewAction"/>
-<hide_menu_item_id id="org.coocox.builder.ui.showHelpViewAction1"/>
 <hide_menu_item_id id="org.coocox.builder.ui.newFile"/>
+<hide_menu_item_id id="org.coocox.builder.ui.showHelpViewAction1"/>
 <hide_menu_item_id id="org.coocox.builder.ui.actions.ConfigurationAction"/>
 <hide_menu_item_id id="org.coocox.builder.ui.builderDefaultLayout"/>
 <hide_menu_item_id id="org.eclipse.jdt.ui.source.menu"/>
@@ -218,8 +208,8 @@
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <hide_toolbar_item_id id="org.coocox.builder.ui.build"/>
 <hide_toolbar_item_id id="org.coocox.welcome.ui.action.welcome"/>
-<hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideProgramDownloadAction"/>
 <hide_toolbar_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
+<hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideProgramDownloadAction"/>
 <view id="org.coocox.codebugger.trace.ui.traceview"/>
 <view id="org.eclipse.debug.ui.VariableView"/>
 <view id="org.eclipse.ui.views.ProgressView"/>
@@ -289,164 +279,163 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/stm32f2_level_gage_test/devices/pwm.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/stm32f2_level_gage_test/devices/keyboard.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/stm32f2_level_gage_test/devices/level_gage_test.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/stm32f2_level_gage_test/devices/pwm.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/stm32f2_level_gage_test/FreeRTOSV7.1.0/Source/include/semphr.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/stm32f2_level_gage_test/FreeRTOSV7.1.0/Source/include/queue.h"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/stm32f2_level_gage_test/cmsis_boot/startup/startup_stm32f4xx.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/stm32f2_level_gage_test/devices/level_gage_test.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/stm32f2_level_gage_test/main.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/stm32f2_level_gage_test/main.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/stm32f2_level_gage_test/devices/adc.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/stm32f2_level_gage_test/devices/adc.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/stm32f2_level_gage_test/cmsis_lib/include/stm32f4xx_adc.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/stm32f2_level_gage_test/cmsis_lib/source/stm32f4xx_adc.c"/>
 </editors>
-<item historyLabel="pwm.h" index="3">
-<position info="not_deleted" x="1048" y="0"/>
-</item>
-<item historyLabel="pwm.c" index="0">
-<position info="not_deleted" x="182" y="19"/>
-</item>
-<item historyLabel="pwm.h" index="3">
-<position info="not_deleted" x="183" y="0"/>
-</item>
-<item historyLabel="pwm.c" index="0">
-<position info="not_deleted" x="3465" y="45"/>
-</item>
-<item historyLabel="level_gage_test.c" index="2">
-<position info="not_deleted" x="7188" y="0"/>
-</item>
-<item historyLabel="level_gage_test.c" index="2">
-<position info="not_deleted" x="6144" y="0"/>
-</item>
-<item historyLabel="pwm.c" index="0">
-<position info="not_deleted" x="4738" y="19"/>
-</item>
-<item historyLabel="level_gage_test.c" index="2">
-<position info="not_deleted" x="6072" y="0"/>
-</item>
-<item historyLabel="semphr.h" index="4">
-<position info="not_deleted" x="7841" y="31"/>
-</item>
-<item historyLabel="level_gage_test.c" index="2">
-<position info="not_deleted" x="6124" y="0"/>
-</item>
-<item historyLabel="queue.h" index="5">
-<position info="not_deleted" x="17693" y="155"/>
-</item>
-<item historyLabel="queue.h" index="5">
-<position info="not_deleted" x="4006" y="83"/>
-</item>
-<item historyLabel="semphr.h" index="4">
-<position info="not_deleted" x="4106" y="20"/>
-</item>
-<item historyLabel="queue.h" index="5">
-<position info="not_deleted" x="4006" y="83"/>
-</item>
-<item historyLabel="semphr.h" index="4">
-<position info="not_deleted" x="4106" y="20"/>
-</item>
-<item historyLabel="pwm.h" index="3">
-<position info="not_deleted" x="183" y="0"/>
-</item>
-<item historyLabel="pwm.h" index="3">
-<position info="not_deleted" x="164" y="0"/>
-</item>
-<item historyLabel="pwm.h" index="3">
-<position info="not_deleted" x="1048" y="0"/>
-</item>
-<item historyLabel="level_gage_test.c" index="2">
-<position info="not_deleted" x="468" y="0"/>
-</item>
-<item historyLabel="pwm.c" index="0">
-<position info="not_deleted" x="3250" y="0"/>
-</item>
-<item historyLabel="semphr.h" index="4">
-<position info="not_deleted" x="5826" y="22"/>
-</item>
-<item historyLabel="pwm.c" index="0">
-<position info="not_deleted" x="3250" y="0"/>
-</item>
-<item historyLabel="keyboard.c" index="1">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="pwm.c" index="0">
-<position info="not_deleted" x="3250" y="0"/>
-</item>
-<item historyLabel="startup_stm32f4xx.c" index="6">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="main.c" index="7">
-<position info="not_deleted" x="711" y="0"/>
-</item>
-<item historyLabel="pwm.c" index="0">
-<position info="not_deleted" x="4564" y="0"/>
-</item>
-<item historyLabel="level_gage_test.c" index="2">
-<position info="not_deleted" x="468" y="0"/>
-</item>
-<item historyLabel="pwm.c" index="0">
-<position info="not_deleted" x="4564" y="0"/>
-</item>
-<item historyLabel="level_gage_test.c" index="2">
-<position info="not_deleted" x="6146" y="0"/>
-</item>
-<item historyLabel="pwm.c" index="0">
-<position info="not_deleted" x="4564" y="0"/>
-</item>
-<item historyLabel="level_gage_test.c" index="2">
-<position/>
-</item>
-<item historyLabel="main.c" index="8">
-<position info="not_deleted" x="809" y="0"/>
-</item>
-<item historyLabel="main.c" index="8">
+<item historyLabel="main.c" index="3">
 <position info="not_deleted" x="711" y="0"/>
 </item>
 <item historyLabel="level_gage_test.c" index="2">
-<position/>
+<position info="not_deleted" x="6200" y="0"/>
 </item>
 <item historyLabel="level_gage_test.c" index="2">
-<position info="not_deleted" x="6146" y="0"/>
+<position info="not_deleted" x="3558" y="0"/>
 </item>
 <item historyLabel="level_gage_test.c" index="2">
-<position info="not_deleted" x="8768" y="0"/>
-</item>
-<item historyLabel="level_gage_test.c" index="2">
-<position info="not_deleted" x="6146" y="0"/>
-</item>
-<item historyLabel="level_gage_test.c" index="2">
-<position info="not_deleted" x="6278" y="0"/>
-</item>
-<item historyLabel="level_gage_test.c" index="2">
-<position info="not_deleted" x="6439" y="0"/>
-</item>
-<item historyLabel="level_gage_test.c" index="2">
-<position info="not_deleted" x="6146" y="0"/>
-</item>
-<item historyLabel="pwm.c" index="0">
-<position info="not_deleted" x="4564" y="0"/>
-</item>
-<item historyLabel="level_gage_test.c" index="2">
-<position info="not_deleted" x="1508" y="0"/>
-</item>
-<item historyLabel="pwm.c" index="0">
-<position info="not_deleted" x="4564" y="0"/>
-</item>
-<item historyLabel="pwm.c" index="0">
-<position info="not_deleted" x="4693" y="0"/>
+<position info="not_deleted" x="4791" y="0"/>
 </item>
 <item historyLabel="pwm.c" index="0">
 <position info="not_deleted" x="6014" y="20"/>
 </item>
 <item historyLabel="level_gage_test.c" index="2">
-<position info="not_deleted" x="1508" y="0"/>
+<position info="not_deleted" x="4832" y="0"/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position info="not_deleted" x="5024" y="0"/>
+</item>
+<item historyLabel="adc.h" index="5">
+<position info="not_deleted" x="489" y="0"/>
 </item>
 <item historyLabel="pwm.c" index="0">
 <position info="not_deleted" x="6014" y="20"/>
 </item>
-<item historyLabel="level_gage_test.c" index="2">
-<position info="not_deleted" x="6662" y="0"/>
+<item historyLabel="adc.c" index="4">
+<position info="not_deleted" x="5024" y="0"/>
 </item>
-<item active="true" historyLabel="startup_stm32f4xx.c" index="6">
-<position info="not_deleted" x="14795" y="0"/>
+<item historyLabel="adc.c" index="4">
+<position info="not_deleted" x="2401" y="0"/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position info="not_deleted" x="2417" y="0"/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position info="not_deleted" x="2447" y="0"/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position info="not_deleted" x="4569" y="0"/>
+</item>
+<item historyLabel="level_gage_test.c" index="2">
+<position info="not_deleted" x="4832" y="0"/>
+</item>
+<item historyLabel="pwm.c" index="0">
+<position info="not_deleted" x="4660" y="0"/>
+</item>
+<item historyLabel="pwm.h" index="1">
+<position info="not_deleted" x="513" y="16"/>
+</item>
+<item historyLabel="pwm.c" index="0">
+<position info="not_deleted" x="4628" y="45"/>
+</item>
+<item historyLabel="level_gage_test.c" index="2">
+<position info="not_deleted" x="1872" y="0"/>
+</item>
+<item historyLabel="pwm.c" index="0">
+<position info="not_deleted" x="4628" y="45"/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position info="not_deleted" x="1467" y="0"/>
+</item>
+<item historyLabel="stm32f4xx_adc.h" index="6">
+<position/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position info="not_deleted" x="1613" y="0"/>
+</item>
+<item historyLabel="stm32f4xx_adc.h" index="6">
+<position/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position info="not_deleted" x="1613" y="0"/>
+</item>
+<item historyLabel="pwm.c" index="0">
+<position info="not_deleted" x="4628" y="45"/>
+</item>
+<item historyLabel="level_gage_test.c" index="2">
+<position info="not_deleted" x="1872" y="0"/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position/>
+</item>
+<item historyLabel="stm32f4xx_adc.h" index="6">
+<position/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position/>
+</item>
+<item historyLabel="stm32f4xx_adc.h" index="6">
+<position/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position info="not_deleted" x="2795" y="0"/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position info="not_deleted" x="1647" y="0"/>
+</item>
+<item historyLabel="stm32f4xx_adc.c" index="7">
+<position/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position info="not_deleted" x="2882" y="0"/>
+</item>
+<item historyLabel="stm32f4xx_adc.c" index="7">
+<position info="not_deleted" x="30019" y="24"/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position info="not_deleted" x="2882" y="0"/>
+</item>
+<item historyLabel="main.c" index="3">
+<position info="not_deleted" x="540" y="0"/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position info="not_deleted" x="2879" y="0"/>
+</item>
+<item historyLabel="stm32f4xx_adc.c" index="7">
+<position info="not_deleted" x="28975" y="14"/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position/>
+</item>
+<item historyLabel="stm32f4xx_adc.h" index="6">
+<position/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position info="not_deleted" x="2741" y="0"/>
+</item>
+<item historyLabel="stm32f4xx_adc.c" index="7">
+<position info="not_deleted" x="24606" y="24"/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position/>
+</item>
+<item historyLabel="stm32f4xx_adc.h" index="6">
+<position info="not_deleted" x="17712" y="19"/>
+</item>
+<item historyLabel="adc.c" index="4">
+<position info="not_deleted" x="2908" y="0"/>
+</item>
+<item historyLabel="main.c" index="3">
+<position info="not_deleted" x="960" y="0"/>
+</item>
+<item historyLabel="level_gage_test.c" index="2">
+<position info="not_deleted" x="1872" y="0"/>
+</item>
+<item active="true" historyLabel="adc.c" index="4">
+<position info="not_deleted" x="2910" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -455,6 +444,24 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_adc.h" tooltip="stm32f2_level_gage_test/cmsis_lib/include/stm32f4xx_adc.h">
+<persistable path="/stm32f2_level_gage_test/cmsis_lib/include/stm32f4xx_adc.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_adc.c" tooltip="stm32f2_level_gage_test/cmsis_lib/source/stm32f4xx_adc.c">
+<persistable path="/stm32f2_level_gage_test/cmsis_lib/source/stm32f4xx_adc.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="pwm.h" tooltip="stm32f2_level_gage_test/devices/pwm.h">
+<persistable path="/stm32f2_level_gage_test/devices/pwm.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="adc.h" tooltip="stm32f2_level_gage_test/devices/adc.h">
+<persistable path="/stm32f2_level_gage_test/devices/adc.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="adc.c" tooltip="stm32f2_level_gage_test/devices/adc.c">
+<persistable path="/stm32f2_level_gage_test/devices/adc.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="keyboard.c" tooltip="stm32f2_level_gage_test/devices/keyboard.c">
+<persistable path="/stm32f2_level_gage_test/devices/keyboard.c"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f4xx.c" tooltip="stm32f2_level_gage_test/cmsis_boot/startup/startup_stm32f4xx.c">
 <persistable path="/stm32f2_level_gage_test/cmsis_boot/startup/startup_stm32f4xx.c"/>
 </file>
@@ -463,9 +470,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="semphr.h" tooltip="stm32f2_level_gage_test/FreeRTOSV7.1.0/Source/include/semphr.h">
 <persistable path="/stm32f2_level_gage_test/FreeRTOSV7.1.0/Source/include/semphr.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="keyboard.c" tooltip="stm32f2_level_gage_test/devices/keyboard.c">
-<persistable path="/stm32f2_level_gage_test/devices/keyboard.c"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="drive.h" tooltip="pilorama/devices/drive.h">
 <persistable path="/pilorama/devices/drive.h"/>
@@ -476,26 +480,11 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="mbport.c" tooltip="stm32f2_level_gage_test/modbus/port/mbport.c">
 <persistable path="/stm32f2_level_gage_test/modbus/port/mbport.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="pwm.h" tooltip="stm32f2_level_gage_test/devices/pwm.h">
-<persistable path="/stm32f2_level_gage_test/devices/pwm.h"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="level_gage_test.h" tooltip="stm32f2_level_gage_test/devices/level_gage_test.h">
 <persistable path="/stm32f2_level_gage_test/devices/level_gage_test.h"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="adc.h" tooltip="stm32f2_level_gage_test/devices/adc.h">
-<persistable path="/stm32f2_level_gage_test/devices/adc.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="adc.c" tooltip="stm32f2_level_gage_test/devices/adc.c">
-<persistable path="/stm32f2_level_gage_test/devices/adc.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_adc.h" tooltip="stm32f2_level_gage_test/cmsis_lib/include/stm32f4xx_adc.h">
-<persistable path="/stm32f2_level_gage_test/cmsis_lib/include/stm32f4xx_adc.h"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="protocol.c" tooltip="stm32f2_level_gage_test/modbus/protocol.c">
 <persistable path="/stm32f2_level_gage_test/modbus/protocol.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="buzzer.h" tooltip="stm32f2_level_gage_test/devices/buzzer.h">
-<persistable path="/stm32f2_level_gage_test/devices/buzzer.h"/>
 </file>
 </mruList>
 </workbench>
